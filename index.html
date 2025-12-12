@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda de Coral & Daniel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES DE COLOR (GUINDA THEME) --- */
+        :root {
+            --guinda: #722F37; /* Color Vino/Merlot */
+            --guinda-dark: #4a1a21;
+            --dorado: #C5A059;
+            --blanco: #ffffff;
+            --gris-claro: #f4f4f4;
+            --texto: #333333;
+        }
+
+        /* --- RESET & BASICS --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--texto);
+            background-color: var(--gris-claro);
+            overflow-x: hidden;
+        }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+        /* --- EFECTO DE TINTA (INK REVEAL) AL INICIO --- */
+        .ink-loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--blanco);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeOutInk 2.5s ease-in-out forwards;
+            pointer-events: none; /* Permite clicks después de la animación */
+        }
+        
+        /* Simulación de mancha de tinta expandiéndose usando clip-path */
+        .ink-blob {
+            width: 100%;
+            height: 100%;
+            background-color: var(--guinda);
+            position: absolute;
+            clip-path: circle(0% at 50% 50%);
+            animation: inkSpread 2s ease-in-out forwards;
+        }
+
+        @keyframes inkSpread {
+            0% { clip-path: circle(0% at 50% 50%); }
+            50% { clip-path: circle(30% at 50% 50%); }
+            100% { clip-path: circle(150% at 50% 50%); opacity: 0; }
+        }
+        
+        @keyframes fadeOutInk {
+            0% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        /* --- HERO SECTION CON PARALLAX --- */
+        .hero {
+            height: 100vh;
+            /* FOTO DE FONDO (CAMBIAR URL AQUI) */
+            background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-attachment: fixed; /* Efecto Parallax */
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.4); /* Oscurecer foto */
+            width: 100%; height: 100%;
+            position: absolute;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--blanco);
+            animation: slideUp 2s ease-out 1s backwards;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* --- SECCIONES GENERALES --- */
+        section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .section-title {
+            color: var(--guinda);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--dorado);
+            margin: 10px auto 0;
+        }
+
+        /* --- CONTADOR --- */
+        .countdown-section {
+            background-color: var(--blanco);
+        }
+        
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .time-box {
+            background: var(--guinda);
+            color: var(--blanco);
+            padding: 20px;
+            min-width: 100px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(114, 47, 55, 0.3);
+        }
+        
+        .time-box span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .time-box label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- CODIGO DE VESTIMENTA --- */
+        .dresscode-section {
+            background-color: var(--gris-claro);
+        }
+
+        .dresscode-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--blanco);
+            padding: 30px;
+            border-radius: 10px;
+            flex: 1 1 300px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--guinda);
+        }
+
+        .reserved-colors {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .color-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            position: relative;
+        }
+        
+        /* Cruz de "No usar" */
+        .color-circle::after {
+            content: '✕';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255,255,255, 0.8);
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .bg-blue { background-color: #000080; } /* Azul Marino */
+        .bg-guinda { background-color: var(--guinda); } /* Guinda */
+        .bg-white { background-color: #ffffff; border: 1px solid #ccc; } /* Blanco */
+        .bg-white::after { color: #333; }
+
+        /* --- SEGUNDO PARALLAX (FOTO PAREJA) --- */
+        .parallax-divider {
+            height: 400px;
+            /* FOTO SECUNDARIA (CAMBIAR URL AQUI) */
+            background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+        }
+
+        /* --- LUGAR / MAPA --- */
+        .location-section {
+            background: var(--blanco);
+        }
+        
+        .map-container {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin: 20px auto;
+            border: 2px solid var(--guinda);
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--guinda-dark);
+            color: var(--blanco);
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .btn-rsvp {
+            background: var(--dorado);
+            color: var(--blanco);
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: 0.3s;
+            display: inline-block;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+        
+        .btn-rsvp:hover {
+            background: #b08d4d;
+            transform: scale(1.05);
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .timer { gap: 10px; }
+            .time-box { min-width: 70px; padding: 10px; }
+            .time-box span { font-size: 1.5rem; }
+            .hero, .parallax-divider { background-attachment: scroll; } /* Parallax suele fallar en mobile, mejor desactivar o usar JS */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ink-loader">
+        <div class="ink-blob"></div>
+    </div>
+
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p>¡Nos casamos!</p>
+            <h1>Coral & Daniel</h1>
+            <p>12 de Noviembre, 2025</p>
+        </div>
+    </header>
+
+    <section class="countdown-section">
+        <h2 class="section-title">Faltan</h2>
+        <div class="timer" id="countdown">
+            <div class="time-box"><span id="days">00</span><label>Días</label></div>
+            <div class="time-box"><span id="hours">00</span><label>Horas</label></div>
+            <div class="time-box"><span id="minutes">00</span><label>Min</label></div>
+            <div class="time-box"><span id="seconds">00</span><label>Seg</label></div>
+        </div>
+        <p style="margin-top: 20px; font-style: italic;">Esperamos con emoción compartir este día contigo.</p>
+    </section>
+
+    <section class="dresscode-section">
+        <h2 class="section-title">Detalles del Evento</h2>
+        
+        <div class="dresscode-container">
+            <div class="card">
+                <h3>Código de Vestimenta</h3>
+                <p style="margin-top:10px; font-weight: 600;">Formal / Etiqueta Rigurosa</p>
+                <p style="margin-top:10px; font-size: 0.9rem;">
+                    Queremos que todos se vean espectaculares.
+                </p>
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+                
+                <h4>Colores Reservados</h4>
+                <p style="font-size: 0.85rem; color: #666;">(Exclusivos para familia y cortejo)</p>
+                
+                <div class="reserved-colors">
+                    <div class="color-circle bg-blue" title="Azul Reservado"></div>
+                    <div class="color-circle bg-guinda" title="Guinda Reservado"></div>
+                    <div class="color-circle bg-white" title="Blanco Reservado"></div>
+                </div>
+                <p style="font-size: 0.8rem; margin-top: 10px; font-style: italic;">Por favor evitar estos colores.</p>
+            </div>
+
+            <div class="card">
+                <h3>Ceremonia y Recepción</h3>
+                <p style="margin-top:10px;"><b>Lugar:</b> Hacienda Las Nubes</p>
+                <p>Calle del Amor #123, Ciudad de México</p>
+                <p style="margin-top:15px;"><b>Hora:</b> 5:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="parallax-divider">
+        </div>
+
+    <section class="location-section">
+        <h2 class="section-title">Ubicación</h2>
+        <p>Da clic en el mapa para ver la ruta en Google Maps</p>
+        
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.536979601633!2d-99.16518168509355!3d19.43260768688432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8cb159b3525%3A0x633160e184715871!2sPalacio%20de%20Bellas%20Artes!5e0!3m2!1ses!2smx!4v1619555555555!5m2!1ses!2smx" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <footer>
+        <h2>Coral & Daniel</h2>
+        <p>¡Gracias por ser parte de nuestra historia!</p>
+        <br>
+        <a href="https://wa.me/1234567890?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Coral%20y%20Daniel" class="btn-rsvp">
+            Confirmar Asistencia (WhatsApp)
+        </a>
+    </footer>
+
+    <script>
+        // --- CONFIGURACIÓN DE LA FECHA ---
+        // Cambia la fecha aquí: (Año, Mes [0-11], Día, Hora, Minuto)
+        // Nota: Los meses en JS van de 0 (Enero) a 11 (Diciembre). Noviembre es 10.
+        const weddingDate = new Date(2025, 10, 12, 17, 0, 0).getTime();
+
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            // Cálculos de tiempo
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Mostrar resultado en los elementos
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+
+            // Si la cuenta regresiva termina
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown").innerHTML = "<h3>¡Llegó el gran día!</h3>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
