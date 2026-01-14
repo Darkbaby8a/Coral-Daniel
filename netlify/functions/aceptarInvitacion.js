@@ -31,6 +31,10 @@ export const handler = async (event) => {
     };
 
   } catch (error) {
+    const check = await pool.query(
+  "SELECT current_database(), current_schema()"
+);
+console.log(check.rows);
     console.error(error);
     return {
       statusCode: 500,
@@ -38,3 +42,4 @@ export const handler = async (event) => {
     };
   }
 };
+
