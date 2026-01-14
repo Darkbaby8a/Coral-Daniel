@@ -15,7 +15,7 @@ export const handler = async (event) => {
 
     const result = await pool.query(
       `
-    SELECT 1
+    SELECT * from invitados
       `
     );
 
@@ -36,6 +36,7 @@ console.log(check.rows);
     };
   }
 };
+
 
 
 
