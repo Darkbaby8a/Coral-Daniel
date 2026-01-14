@@ -1,0 +1,647 @@
+[
+    {
+        "Familia": "FamiliaRamirezHermentino",
+        "Pases": 2,
+        "Acepto": true
+    },
+    {
+        "Familia": "Fam Ochoa Cova",
+        "Pases": 5,
+        "Acepto": false
+    },
+    {
+        "Familia": "Cesar",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Sarita",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Landa",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Abigail",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Serrano",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Romualda",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Deyaneira",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Luz",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Virginia",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Sanchez Aaron",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Molina",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Elva",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Sanchez Grande",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Flor",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Toribio",
+        "Pases": 7,
+        "Acepto": false
+    },
+    {
+        "Familia": "Yolanda",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Cuquita",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Beatriz",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Sosa",
+        "Pases": 5,
+        "Acepto": false
+    },
+    {
+        "Familia": "Garcia",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Garcia_2",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Berumen",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Martita",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Patricia Rodriguez",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Aurelia",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Paz",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Juan Garcia",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Daniel Ramirez",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Nechi",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Valenzuela",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Valenzuela_2",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Flores",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Tia Ericka",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Rafa",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Juaritos",
+        "Pases": 6,
+        "Acepto": false
+    },
+    {
+        "Familia": "Dany Perez",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Contreras",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Jimmy",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Corchado",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Ishmael",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Mena",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Mireya",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Laura",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Alan",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Robert",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Armando",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Correa",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Rocio",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Adriana",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Adriana_2",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Jasiel",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Escare\u00f1o",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Galindo",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Ibsen",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Cordova",
+        "Pases": 7,
+        "Acepto": false
+    },
+    {
+        "Familia": "Dennice",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Erik Armenta",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Angelica",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Mimi Invitados",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Areli",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Lupillo",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Carlos Diaz JR",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Carlos Diaz",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Gonz\u00e1lez Contreras",
+        "Pases": 6,
+        "Acepto": false
+    },
+    {
+        "Familia": "Victorino",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Unnie",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Victoria",
+        "Pases": 5,
+        "Acepto": false
+    },
+    {
+        "Familia": "Aguilera",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "De la Rosa",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Rodriguez dulce",
+        "Pases": 5,
+        "Acepto": false
+    },
+    {
+        "Familia": "Ray",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Chavez",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Reyes",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Luna",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Lozano",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Valerio",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Aldana",
+        "Pases": 6,
+        "Acepto": false
+    },
+    {
+        "Familia": "Valenzuela",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Recio",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Perez",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Sarabia Janeth",
+        "Pases": 5,
+        "Acepto": false
+    },
+    {
+        "Familia": "Ochoa Mirsa",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Ochoa pablo",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Ochoa L",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Ramirez",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Azahel",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Torres perla",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Marcela",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Cuca",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Bety y mar\u00eda",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Mari Bernal",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Marina",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Ofe y tachito",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Nena",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Carrillo",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Cerda",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Licha vecina y nohemi tere b",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Hernandez karen",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Cortina",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Herrera",
+        "Pases": 5,
+        "Acepto": false
+    },
+    {
+        "Familia": "Galaviz",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Tovar y octavio",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Montes Israel",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Sandoval Saul y Ricardo",
+        "Pases": 5,
+        "Acepto": false
+    },
+    {
+        "Familia": "Imelda",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Anabel y tito",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Alejandra Ensayo",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Garcia",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Gutierrez",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Sarabia Edith",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Armendariz",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "T\u00eda Alma",
+        "Pases": 6,
+        "Acepto": false
+    },
+    {
+        "Familia": "Cuquis wendy wero",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Tia Licha",
+        "Pases": 5,
+        "Acepto": false
+    },
+    {
+        "Familia": "T\u00eda Laura",
+        "Pases": 8,
+        "Acepto": false
+    },
+    {
+        "Familia": "Rome y Chindo",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Lilia",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Joca",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Adriana",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Jael",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Dafne",
+        "Pases": 3,
+        "Acepto": false
+    },
+    {
+        "Familia": "Mayte",
+        "Pases": 1,
+        "Acepto": false
+    },
+    {
+        "Familia": "Jacqueline",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Rosita",
+        "Pases": 4,
+        "Acepto": false
+    },
+    {
+        "Familia": "Abi",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "Ana Karen",
+        "Pases": 2,
+        "Acepto": false
+    },
+    {
+        "Familia": "T\u00eda rosa y perla",
+        "Pases": 3,
+        "Acepto": false
+    }
+]
