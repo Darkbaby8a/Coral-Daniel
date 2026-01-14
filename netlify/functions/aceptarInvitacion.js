@@ -1,22 +1,17 @@
 import { Pool } from "pg";
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.NETLIFY_DATABASE_URL_UNPOOLED,
   ssl: { rejectUnauthorized: false },
 });
 
 export const handler = async (event) => {
-  console.log("Evento recibido:", event.body);
-
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
   try {
-    const body = JSON.parse(event.body);
-    const familia = body.familia;
-
-    console.log("Familia:", familia);
+    const { familia } = JSON.parse(event.body);
 
     const result = await pool.query(
       `
@@ -24,28 +19,22 @@ export const handler = async (event) => {
       SET acepto = true,
           confirmado_en = NOW()
       WHERE familia = $1
+        AND acepto = false
       RETURNING id;
       `,
       [familia]
     );
 
-    console.log("Resultado:", result.rowCount);
-
     return {
       statusCode: 200,
-      body: JSON.stringify({ ok: true, rowCount: result.rowCount }),
+      body: JSON.stringify({ ok: result.rowCount > 0 }),
     };
 
   } catch (error) {
-    console.error("ERROR REAL:", error);
-
+    console.error(error);
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        ok: false,
-        error: error.message,
-        detail: error.detail || null
-      }),
+      body: JSON.stringify({ ok: false, error: error.message }),
     };
   }
 };
