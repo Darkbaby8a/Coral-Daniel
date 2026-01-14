@@ -15,7 +15,13 @@ export const handler = async (event) => {
 
     const result = await pool.query(
       `
-    SELECT * from invitados
+   CREATE TABLE public.invitados (
+  id SERIAL PRIMARY KEY,
+  familia TEXT UNIQUE NOT NULL,
+  pases INT NOT NULL,
+  acepto BOOLEAN DEFAULT false,
+  confirmado_en TIMESTAMP
+);
       `
     );
 
@@ -36,6 +42,7 @@ console.log(check.rows);
     };
   }
 };
+
 
 
 
