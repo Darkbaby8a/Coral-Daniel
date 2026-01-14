@@ -7,44 +7,72 @@ const pool = new Pool({
 
 export const handler = async (event) => {
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ ok: false, message: "Method Not Allowed" }),
+    };
   }
 
   try {
+    // 1️⃣ Leer datos enviados desde el frontend
     const { familia } = JSON.parse(event.body);
 
+    if (!familia) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ ok: false, message: "Familia requerida" }),
+      };
+    }
+
+    // 2️⃣ UPDATE en Neon
     const result = await pool.query(
       `
-   CREATE TABLE public.invitados (
-  id SERIAL PRIMARY KEY,
-  familia TEXT UNIQUE NOT NULL,
-  pases INT NOT NULL,
-  acepto BOOLEAN DEFAULT false,
-  confirmado_en TIMESTAMP
-);
-      `
+      UPDATE public.invitados
+      SET acepto = true,
+          confirmado_en = NOW()
+      WHERE familia = $1
+        AND acepto = false
+      RETURNING id;
+      `,
+      [familia]
     );
+
+    // 3️⃣ Si no se actualizó nada
+    if (result.rowCount === 0) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          ok: false,
+          message: "Invitación no encontrada o ya confirmada",
+        }),
+      };
+    }
+
+    // 4️⃣ Todo bien
+    console.log("Invitación confirmada:", familia);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ ok: result.rowCount > 0 }),
+      body: JSON.stringify({ ok: true }),
     };
 
   } catch (error) {
+    // 🔍 Logs útiles para Netlify
+    console.error("ERROR Neon:", error.message);
+
     const check = await pool.query(
-  "SELECT to_regclass('public.invitados')"
-);
-console.log(check.rows);
-    console.error(error);
+      "SELECT current_database(), current_schema(), to_regclass('public.invitados')"
+    );
+
+    console.log("CHECK:", check.rows);
+
     return {
       statusCode: 500,
-      body: JSON.stringify({ ok: false, error: error.message,rows:check.rows,dburl:process.env.NETLIFY_DATABASE_URL_UNPOOLED }),
+      body: JSON.stringify({
+        ok: false,
+        error: error.message,
+        check: check.rows,
+      }),
     };
   }
 };
-
-
-
-
-
-
