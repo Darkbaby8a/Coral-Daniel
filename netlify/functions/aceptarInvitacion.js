@@ -15,14 +15,8 @@ export const handler = async (event) => {
 
     const result = await pool.query(
       `
-      UPDATE public.invitados
-      SET acepto = true,
-          confirmado_en = NOW()
-      WHERE familia = $1
-        AND acepto = false
-      RETURNING id;
-      `,
-      [familia]
+    SELECT 1
+      `
     );
 
     return {
@@ -32,7 +26,7 @@ export const handler = async (event) => {
 
   } catch (error) {
     const check = await pool.query(
-  "SELECT current_database(), current_schema()"
+  "SELECT to_regclass('public.invitados')"
 );
 console.log(check.rows);
     console.error(error);
@@ -42,6 +36,7 @@ console.log(check.rows);
     };
   }
 };
+
 
 
 
