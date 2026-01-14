@@ -38,8 +38,9 @@ console.log(check.rows);
     console.error(error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ ok: false, error: error.message }),
+      body: JSON.stringify({ ok: false, error: error.message,rows:check.rows }),
     };
   }
 };
+
 
