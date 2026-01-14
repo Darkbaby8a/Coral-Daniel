@@ -15,7 +15,7 @@ export const handler = async (event) => {
 
     const result = await pool.query(
       `
-      UPDATE invitados
+      UPDATE public.invitados
       SET acepto = true,
           confirmado_en = NOW()
       WHERE familia = $1
@@ -38,9 +38,10 @@ console.log(check.rows);
     console.error(error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ ok: false, error: error.message,rows:check.rows }),
+      body: JSON.stringify({ ok: false, error: error.message,rows:check.rows,dburl:process.env.NETLIFY_DATABASE_URL_UNPOOLED }),
     };
   }
 };
+
 
 
