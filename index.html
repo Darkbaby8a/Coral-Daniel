@@ -5,980 +5,1003 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Save The Date - Coral & Daniel</title>
-    
+
     <style>
-/* ===========================
+        /* ===========================
    FUENTES
    =========================== */
-@font-face {
-    font-family: 'AvenirNext';
-    src: url('./AvenirNextLTPro-Regular.otf') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-}
+        @font-face {
+            font-family: 'AvenirNext';
+            src: url('./AvenirNextLTPro-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
 
-@font-face {
-    font-family: 'AvenirNext';
-    src: url('./AvenirNextLTPro-It.otf') format('opentype');
-    font-weight: 400;
-    font-style: italic;
-}
+        @font-face {
+            font-family: 'AvenirNext';
+            src: url('./AvenirNextLTPro-It.otf') format('opentype');
+            font-weight: 400;
+            font-style: italic;
+        }
 
-@font-face {
-    font-family: 'AvenirNext';
-    src: url('./AvenirNextLTPro-Demi.otf') format('opentype');
-    font-weight: 600;
-    font-style: normal;
-}
+        @font-face {
+            font-family: 'AvenirNext';
+            src: url('./AvenirNextLTPro-Demi.otf') format('opentype');
+            font-weight: 600;
+            font-style: normal;
+        }
 
-@font-face {
-    font-family: 'AvenirNext';
-    src: url('./AvenirNextLTPro-Bold.otf') format('opentype');
-    font-weight: 700;
-    font-style: normal;
-}
+        @font-face {
+            font-family: 'AvenirNext';
+            src: url('./AvenirNextLTPro-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
 
-/* ===========================
+        /* ===========================
    VARIABLES
    =========================== */
-:root {
-    --vino: #630d16;
-    --vino-claro: #8b1a26;
-    --fondo: #f6f1ea;
-    --texto: #3a3a3a;
-    --dorado: #b0935a;
-    --beige: #efe6d8;
-}
+        :root {
+            --vino: #630d16;
+            --vino-claro: #8b1a26;
+            --fondo: #f6f1ea;
+            --texto: #3a3a3a;
+            --dorado: #b0935a;
+            --beige: #efe6d8;
+        }
 
-/* ===========================
+        /* ===========================
    RESET
    =========================== */
-* {
-    box-sizing: border-box;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'AvenirNext', sans-serif;
-    background-color: var(--fondo);
-    color: var(--texto);
-    scroll-behavior: smooth;
-}
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'AvenirNext', sans-serif;
+            background-color: var(--fondo);
+            color: var(--texto);
+            scroll-behavior: smooth;
+        }
 
-/* ===========================
+        /* ===========================
    TIPOGRAFÍA
    =========================== */
-h1 {
-    font-size: clamp(2.8rem, 6vw, 4.2rem);
-    font-weight: 700;
-    letter-spacing: 2px;
-    margin: 0;
-}
+        h1 {
+            font-size: clamp(2.8rem, 6vw, 4.2rem);
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 0;
+        }
 
-h2 {
-    font-size: clamp(1.9rem, 4vw, 2.6rem);
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 30px;
-}
+        h2 {
+            font-size: clamp(1.9rem, 4vw, 2.6rem);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
 
-h3 {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin: 10px 0;
-}
+        h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 10px 0;
+        }
 
-p {
-    font-size: 1.05rem;
-    line-height: 1.9;
-    font-weight: 400;
-}
+        p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            font-weight: 400;
+        }
 
-small {
-    opacity: 0.8;
-}
+        small {
+            opacity: 0.8;
+        }
 
-/* ===========================
+        /* ===========================
    HERO
    =========================== */
-.hero {
-    position: relative;
-    height: 100vh;
-    background: url('FotoPrincipal.jpg') bottom/cover no-repeat fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-}
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: url('FotoPrincipal.jpg') bottom/cover no-repeat fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
 
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(rgba(99,13,22,0.45), rgba(0,0,0,0.35));
-}
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(99, 13, 22, 0.45), rgba(0, 0, 0, 0.35));
+        }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
-}
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
 
-.hero-content h2 {
-    font-size: 1.2rem;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    font-weight: 500;
-}
+        .hero-content h2 {
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
 
-/* ===========================
+        /* ===========================
    COUNTDOWN
    =========================== */
-.countdown {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 25px;
-}
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
 
-.countdown-item {
-    background: rgba(0,0,0,0.2);
-    padding: 18px;
-    border-radius: 14px;
-    min-width: 90px;
-    backdrop-filter: blur(8px);
-}
+        .countdown-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 18px;
+            border-radius: 14px;
+            min-width: 90px;
+            backdrop-filter: blur(8px);
+        }
 
-.countdown-item span {
-    font-size: 2.4rem;
-    font-weight: 700;
-    display: block;
-}
+        .countdown-item span {
+            font-size: 2.4rem;
+            font-weight: 700;
+            display: block;
+        }
 
-/* ===========================
+        /* ===========================
    SECCIONES
    =========================== */
-section {
-    padding: 90px 20px;
-    max-width: 90%;
-    margin: auto;
-    text-align: center;
-    background:
-        url("https://www.transparenttextures.com/patterns/paper-3.png"),
-        var(--fondo);
-}
+        section {
+            padding: 90px 20px;
+            max-width: 90%;
+            margin: auto;
+            text-align: center;
+            background:
+                url("https://www.transparenttextures.com/patterns/paper-3.png"),
+                var(--fondo);
+        }
 
-/* ===========================
+        /* ===========================
    TARJETAS / PAPEL
    =========================== */
-.paper,
-.timeline-item,
-.event-info,
-.passes-box {
-    background: rgba(255,255,255,0.75);
-    backdrop-filter: blur(6px);
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(99,13,22,0.15);
-    border: 1px solid rgba(176,147,90,0.35);
-}
+        .paper,
+        .timeline-item,
+        .event-info,
+        .passes-box {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(6px);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(99, 13, 22, 0.15);
+            border: 1px solid rgba(176, 147, 90, 0.35);
+        }
 
-/* ===========================
+        /* ===========================
    TIMELINE
    =========================== */
-.timeline {
-    max-width: 800px;
-    margin: auto;
-    display: grid;
-    gap: 30px;
-}
+        .timeline {
+            max-width: 800px;
+            margin: auto;
+            display: grid;
+            gap: 30px;
+        }
 
-.timeline-item {
-    display: flex;
-    gap: 20px;
-    padding: 26px;
-    align-items: center;
-}
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            padding: 26px;
+            align-items: center;
+        }
 
-.timeline-item h3 {
-    color: var(--vino);
-}
+        .timeline-item h3 {
+            color: var(--vino);
+        }
 
-/* ===========================
+        /* ===========================
    EVENTOS
    =========================== */
-.schedule-section {
-    max-width: 1000px;
-    margin: auto;
-}
+        .schedule-section {
+            max-width: 1000px;
+            margin: auto;
+        }
 
-.event-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 100px;
-    align-items: center;
-}
+        .event-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 100px;
+            align-items: center;
+        }
 
-.event-card:nth-child(even) {
-    direction: rtl;
-}
+        .event-card:nth-child(even) {
+            direction: rtl;
+        }
 
-.event-card:nth-child(even) .event-info {
-    direction: ltr;
-    text-align: left;
-}
+        .event-card:nth-child(even) .event-info {
+            direction: ltr;
+            text-align: left;
+        }
 
-.event-image {
-    height: 400px;
-    background-size: cover;
-    background-position: center;
-    box-shadow: 18px 18px 0 var(--vino);
-}
+        .event-image {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 18px 18px 0 var(--vino);
+        }
 
-.event-info {
-    padding: 30px;
-    text-align: left;
-}
+        .event-info {
+            padding: 30px;
+            text-align: left;
+        }
 
-.event-info span {
-    letter-spacing: 3px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: var(--vino);
-}
+        .event-info span {
+            letter-spacing: 3px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--vino);
+        }
 
-/* ===========================
+        /* ===========================
    GALERÍA
    =========================== */
-.galeria {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
 
-.galeria img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 22px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
-    transition: transform 0.4s ease, filter 0.4s ease;
-}
+        .galeria img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 22px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
 
-.galeria img:hover {
-    transform: scale(1.06) translateY(-6px);
-    filter: brightness(1.05);
-}
+        .galeria img:hover {
+            transform: scale(1.06) translateY(-6px);
+            filter: brightness(1.05);
+        }
 
-/* ===========================
+        /* ===========================
    BOTONES
    =========================== */
-.btn-rsvp,
-.btn-open {
-    background: var(--vino);
-    color: white;
-    padding: 16px 42px;
-    border-radius: 40px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 12px 30px rgba(99,13,22,0.4);
-}
+        .btn-rsvp,
+        .btn-open {
+            background: var(--vino);
+            color: white;
+            padding: 16px 42px;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 12px 30px rgba(99, 13, 22, 0.4);
+        }
 
-.btn-rsvp:hover,
-.btn-open:hover {
-    background: var(--vino-claro);
-    transform: translateY(-2px);
-}
+        .btn-rsvp:hover,
+        .btn-open:hover {
+            background: var(--vino-claro);
+            transform: translateY(-2px);
+        }
 
-/* ===========================
+        /* ===========================
    INVITACIÓN CERRADA
    =========================== */
-.invitation-cover {
-    position: fixed;
-    inset: 0;
-    background:
-        url("https://www.transparenttextures.com/patterns/paper-3.png"),
-        var(--vino);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
+        .invitation-cover {
+            position: fixed;
+            inset: 0;
+            background:
+                url("https://www.transparenttextures.com/patterns/paper-3.png"),
+                var(--vino);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
 
-.cover-paper {
-    padding: 80px 100px;
-    text-align: center;
-    animation: float 3s ease-in-out infinite;
-}
+        .cover-paper {
+            padding: 80px 100px;
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
 
-/* ===========================
+        /* ===========================
    ANIMACIONES
    =========================== */
-@keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-}
+        @keyframes float {
 
-.invitation-cover.open {
-    animation: open 2s ease forwards;
-}
+            0%,
+            100% {
+                transform: translateY(0);
+            }
 
-@keyframes open {
-    to {
-        opacity: 0;
-        visibility: hidden;
-        transform: scale(1.2);
-    }
-}
+            50% {
+                transform: translateY(-12px);
+            }
+        }
 
-/* ===========================
+        .invitation-cover.open {
+            animation: open 2s ease forwards;
+        }
+
+        @keyframes open {
+            to {
+                opacity: 0;
+                visibility: hidden;
+                transform: scale(1.2);
+            }
+        }
+
+        /* ===========================
    RESPONSIVE
    =========================== */
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
 
-    .hero {
-        height: 90vh;
-        background-attachment: scroll;
-    }
+            .hero {
+                height: 90vh;
+                background-attachment: scroll;
+            }
 
-    .event-card {
-        grid-template-columns: 1fr;
-    }
+            .event-card {
+                grid-template-columns: 1fr;
+            }
 
-    .countdown {
-        flex-wrap: wrap;
-    }
-}
-.petal {
-    position: fixed;
-    top: -40px;
-    z-index: 10000;
-    pointer-events: none;
-    border-radius: 0 60% 0 60%;
-    opacity: 0.9;
-    animation-name: fall;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-}
+            .countdown {
+                flex-wrap: wrap;
+            }
+        }
 
-@keyframes fall {
-    0% {
-        transform: translateY(-40px) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.9;
-    }
-    100% {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: 0;
-    }
-}
-.dress-code {
-    text-align: center;
-    padding: 80px 20px;
-    background: linear-gradient(to bottom, #fff, #f9f4f2);
-}
+        .petal {
+            position: fixed;
+            top: -40px;
+            z-index: 10000;
+            pointer-events: none;
+            border-radius: 0 60% 0 60%;
+            opacity: 0.9;
+            animation-name: fall;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
 
-.dress-code h2 {
-    font-size: 2.4rem;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-}
+        @keyframes fall {
+            0% {
+                transform: translateY(-40px) rotate(0deg);
+                opacity: 0;
+            }
 
-.dress-type {
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #630d16;
-    margin-bottom: 20px;
-}
+            10% {
+                opacity: 0.9;
+            }
 
-.dress-note {
-    max-width: 600px;
-    margin: 0 auto 30px;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #555;
-}
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
 
-.reserved-title {
-    font-weight: 600;
-    margin-bottom: 18px;
-    letter-spacing: 1px;
-}
+        .dress-code {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, #fff, #f9f4f2);
+        }
 
-.dress-code-colors {
-    display: flex;
-    justify-content: center;
-    gap: 22px;
-    margin-bottom: 20px;
-}
+        .dress-code h2 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
 
-.color-circle {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    box-shadow: 0 6px 14px rgba(0,0,0,.15);
-    transition: transform .3s ease;
-}
+        .dress-type {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #630d16;
+            margin-bottom: 20px;
+        }
 
-.color-circle:hover {
-    transform: scale(1.15);
-}
+        .dress-note {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
 
-.color-circle.bride {
-    background: #fff;
-    border: 2px solid gold;
-    position: relative;
-}
+        .reserved-title {
+            font-weight: 600;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+        }
 
-.color-circle.bride::after {
-    content: "✦";
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: gold;
-    font-size: 1.2rem;
-}
+        .dress-code-colors {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin-bottom: 20px;
+        }
 
-.bride-note {
-    font-size: .85rem;
-    color: #777;
-    font-style: italic;
-}
-.attendance {
-    text-align: center;
-    padding: 90px 20px;
-    background: linear-gradient(to bottom, #fff, #f9f4f2);
-}
+        .color-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, .15);
+            transition: transform .3s ease;
+        }
 
-.attendance h2 {
-    font-size: 2.6rem;
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-}
+        .color-circle:hover {
+            transform: scale(1.15);
+        }
 
-.attendance-text {
-    font-size: 1.05rem;
-    color: #555;
-    max-width: 600px;
-    margin: 0 auto 40px;
-    line-height: 1.7;
-}
+        .color-circle.bride {
+            background: #fff;
+            border: 2px solid gold;
+            position: relative;
+        }
 
-.passes-box {
-    background:
-        url("https://www.transparenttextures.com/patterns/paper-3.png"),
-        #630d16;
-    color: #fff;
-    padding: 35px 30px;
-    max-width: 420px;
-    margin: 0 auto 45px;
-    border-radius: 14px;
-    box-shadow: 0 14px 35px rgba(0,0,0,.25);
-    position: relative;
-}
+        .color-circle.bride::after {
+            content: "✦";
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: gold;
+            font-size: 1.2rem;
+        }
 
-.passes-label {
-    font-size: .9rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: .85;
-    margin-bottom: 10px;
-}
+        .bride-note {
+            font-size: .85rem;
+            color: #777;
+            font-style: italic;
+        }
 
-.family-name {
-    font-size: 1.6rem;
-    margin: 10px 0;
-    letter-spacing: 1px;
-}
+        .attendance {
+            text-align: center;
+            padding: 90px 20px;
+            background: linear-gradient(to bottom, #fff, #f9f4f2);
+        }
 
-.passes-count {
-    font-size: 1rem;
-    opacity: .95;
-}
+        .attendance h2 {
+            font-size: 2.6rem;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
 
-.btn-rsvp {
-    display: inline-block;
-    padding: 16px 40px;
-    border-radius: 50px;
-    background: linear-gradient(135deg, #630d16, #8a1c28);
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: all .3s ease;
-    box-shadow: 0 10px 25px rgba(99,13,22,.35);
-}
+        .attendance-text {
+            font-size: 1.05rem;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
 
-.btn-rsvp:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 35px rgba(99,13,22,.5);
-}
-/* ===========================
+        .passes-box {
+            background:
+                url("https://www.transparenttextures.com/patterns/paper-3.png"),
+                #630d16;
+            color: #fff;
+            padding: 35px 30px;
+            max-width: 420px;
+            margin: 0 auto 45px;
+            border-radius: 14px;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, .25);
+            position: relative;
+        }
+
+        .passes-label {
+            font-size: .9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: .85;
+            margin-bottom: 10px;
+        }
+
+        .family-name {
+            font-size: 1.6rem;
+            margin: 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .passes-count {
+            font-size: 1rem;
+            opacity: .95;
+        }
+
+        .btn-rsvp {
+            display: inline-block;
+            padding: 16px 40px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #630d16, #8a1c28);
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all .3s ease;
+            box-shadow: 0 10px 25px rgba(99, 13, 22, .35);
+        }
+
+        .btn-rsvp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 35px rgba(99, 13, 22, .5);
+        }
+
+        /* ===========================
    MEJORAS MÓVIL
    =========================== */
-@media (max-width: 600px) {
+        @media (max-width: 600px) {
 
-    /* -------- TEXTO -------- */
-    h1 {
-        font-size: 2.3rem;
-        letter-spacing: 1px;
-    }
+            /* -------- TEXTO -------- */
+            h1 {
+                font-size: 2.3rem;
+                letter-spacing: 1px;
+            }
 
-    h2 {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-    }
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
 
-    h3 {
-        font-size: 1.3rem;
-    }
+            h3 {
+                font-size: 1.3rem;
+            }
 
-    p {
-        font-size: 0.95rem;
-        line-height: 1.7;
-    }
+            p {
+                font-size: 0.95rem;
+                line-height: 1.7;
+            }
 
-    section {
-        padding: 60px 16px;
-        max-width: 100%;
-    }
+            section {
+                padding: 60px 16px;
+                max-width: 100%;
+            }
 
-    /* -------- HERO -------- */
-    .hero {
-        height: 85vh;
-        background-attachment: scroll;
-        padding: 0 15px;
-    }
+            /* -------- HERO -------- */
+            .hero {
+                height: 85vh;
+                background-attachment: scroll;
+                padding: 0 15px;
+            }
 
-    .hero-content p {
-        font-size: 1.1rem !important;
-    }
+            .hero-content p {
+                font-size: 1.1rem !important;
+            }
 
-    /* -------- COUNTDOWN -------- */
-    .countdown {
-        gap: 10px;
-    }
+            /* -------- COUNTDOWN -------- */
+            .countdown {
+                gap: 10px;
+            }
 
-    .countdown-item {
-        min-width: 70px;
-        padding: 12px;
-    }
+            .countdown-item {
+                min-width: 70px;
+                padding: 12px;
+            }
 
-    .countdown-item span {
-        font-size: 1.8rem;
-    }
+            .countdown-item span {
+                font-size: 1.8rem;
+            }
 
-    /* -------- EVENTOS -------- */
-    .event-card {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        margin-bottom: 70px;
-    }
+            /* -------- EVENTOS -------- */
+            .event-card {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin-bottom: 70px;
+            }
 
-    .event-image {
-        height: 260px;
-        box-shadow: 10px 10px 0 var(--vino);
-    }
+            .event-image {
+                height: 260px;
+                box-shadow: 10px 10px 0 var(--vino);
+            }
 
-    .event-info {
-        padding: 22px;
-        text-align: center;
-    }
+            .event-info {
+                padding: 22px;
+                text-align: center;
+            }
 
-    .event-info span {
-        display: block;
-        margin-bottom: 6px;
-    }
+            .event-info span {
+                display: block;
+                margin-bottom: 6px;
+            }
 
-    /* -------- GALERÍA -------- */
-    .galeria {
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-    }
+            /* -------- GALERÍA -------- */
+            .galeria {
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+            }
 
-    .galeria img {
-        height: 200px;
-        border-radius: 16px;
-    }
+            .galeria img {
+                height: 200px;
+                border-radius: 16px;
+            }
 
-    /* -------- DRESS CODE -------- */
-    .dress-code {
-        padding: 60px 16px;
-    }
+            /* -------- DRESS CODE -------- */
+            .dress-code {
+                padding: 60px 16px;
+            }
 
-    .dress-type {
-        font-size: 1rem;
-        letter-spacing: 2px;
-    }
+            .dress-type {
+                font-size: 1rem;
+                letter-spacing: 2px;
+            }
 
-    .dress-code-colors {
-        gap: 16px;
-    }
+            .dress-code-colors {
+                gap: 16px;
+            }
 
-    .color-circle {
-        width: 44px;
-        height: 44px;
-    }
+            .color-circle {
+                width: 44px;
+                height: 44px;
+            }
 
-    /* -------- ASISTENCIA -------- */
-    .attendance {
-        padding: 70px 16px;
-    }
+            /* -------- ASISTENCIA -------- */
+            .attendance {
+                padding: 70px 16px;
+            }
 
-    .attendance-text {
-        font-size: 0.95rem;
-        margin-bottom: 30px;
-    }
+            .attendance-text {
+                font-size: 0.95rem;
+                margin-bottom: 30px;
+            }
 
-    .passes-box {
-        padding: 26px 20px;
-        margin-bottom: 35px;
-    }
+            .passes-box {
+                padding: 26px 20px;
+                margin-bottom: 35px;
+            }
 
-    .family-name {
-        font-size: 1.4rem;
-    }
+            .family-name {
+                font-size: 1.4rem;
+            }
 
-    /* -------- BOTONES -------- */
-    .btn-rsvp,
-    .btn-open {
-        width: 100%;
-        max-width: 320px;
-        padding: 16px;
-        font-size: 0.95rem;
-    }
+            /* -------- BOTONES -------- */
+            .btn-rsvp,
+            .btn-open {
+                width: 100%;
+                max-width: 320px;
+                padding: 16px;
+                font-size: 0.95rem;
+            }
 
-    /* -------- INVITACIÓN CERRADA -------- */
-    .cover-paper {
-        padding: 50px 30px;
-    }
-}
-button, a {
-    touch-action: manipulation;
-}
-/* ===========================
+            /* -------- INVITACIÓN CERRADA -------- */
+            .cover-paper {
+                padding: 50px 30px;
+            }
+        }
+
+        button,
+        a {
+            touch-action: manipulation;
+        }
+
+        /* ===========================
    AJUSTES FINOS iPhone 390px
    =========================== */
-@media (max-width: 390px) {
+        @media (max-width: 390px) {
 
-    /* ---- CONTENEDOR GENERAL ---- */
-    body {
-        overflow-x: hidden;
-    }
+            /* ---- CONTENEDOR GENERAL ---- */
+            body {
+                overflow-x: hidden;
+            }
 
-    section {
-        padding: 50px 14px;
-    }
+            section {
+                padding: 50px 14px;
+            }
 
-    /* ---- TITULOS ---- */
-    h1 {
-        font-size: 2.1rem;
-        letter-spacing: 0.5px;
-    }
+            /* ---- TITULOS ---- */
+            h1 {
+                font-size: 2.1rem;
+                letter-spacing: 0.5px;
+            }
 
-    h2 {
-        font-size: 1.6rem;
-        margin-bottom: 18px;
-    }
+            h2 {
+                font-size: 1.6rem;
+                margin-bottom: 18px;
+            }
 
-    h3 {
-        font-size: 1.25rem;
-    }
+            h3 {
+                font-size: 1.25rem;
+            }
 
-    p {
-        font-size: 0.9rem;
-        line-height: 1.6;
-    }
+            p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
 
-    /* ---- HERO / PORTADA ---- */
-    .hero {
-        height: 80vh;
-        padding: 0 12px;
-    }
+            /* ---- HERO / PORTADA ---- */
+            .hero {
+                height: 80vh;
+                padding: 0 12px;
+            }
 
-    .hero-content {
-        padding: 0;
-    }
+            .hero-content {
+                padding: 0;
+            }
 
-    /* ---- COUNTDOWN ---- */
-    .countdown {
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+            /* ---- COUNTDOWN ---- */
+            .countdown {
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
 
-    .countdown-item {
-        min-width: 64px;
-        padding: 10px 6px;
-    }
+            .countdown-item {
+                min-width: 64px;
+                padding: 10px 6px;
+            }
 
-    .countdown-item span {
-        font-size: 1.6rem;
-    }
+            .countdown-item span {
+                font-size: 1.6rem;
+            }
 
-    /* ---- EVENTOS ---- */
-    .event-card {
-        grid-template-columns: 1fr;
-        gap: 18px;
-        margin-bottom: 55px;
-    }
+            /* ---- EVENTOS ---- */
+            .event-card {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                margin-bottom: 55px;
+            }
 
-    .event-image {
-        height: 220px;
-        box-shadow: 6px 6px 0 var(--vino);
-    }
+            .event-image {
+                height: 220px;
+                box-shadow: 6px 6px 0 var(--vino);
+            }
 
-    .event-info {
-        padding: 18px;
-        text-align: center;
-    }
+            .event-info {
+                padding: 18px;
+                text-align: center;
+            }
 
-    /* ---- GALERÍA ---- */
-    .galeria {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
+            /* ---- GALERÍA ---- */
+            .galeria {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
 
-    .galeria img {
-        height: 220px;
-        border-radius: 14px;
-    }
+            .galeria img {
+                height: 220px;
+                border-radius: 14px;
+            }
 
-    /* ---- DRESS CODE ---- */
-    .dress-code-colors {
-        gap: 14px;
-    }
+            /* ---- DRESS CODE ---- */
+            .dress-code-colors {
+                gap: 14px;
+            }
 
-    .color-circle {
-        width: 40px;
-        height: 40px;
-    }
+            .color-circle {
+                width: 40px;
+                height: 40px;
+            }
 
-    /* ---- ASISTENCIA ---- */
-    .attendance-text {
-        font-size: 0.9rem;
-        margin-bottom: 26px;
-    }
+            /* ---- ASISTENCIA ---- */
+            .attendance-text {
+                font-size: 0.9rem;
+                margin-bottom: 26px;
+            }
 
-    .passes-box {
-        padding: 22px 16px;
-        border-radius: 12px;
-    }
+            .passes-box {
+                padding: 22px 16px;
+                border-radius: 12px;
+            }
 
-    .family-name {
-        font-size: 1.3rem;
-    }
+            .family-name {
+                font-size: 1.3rem;
+            }
 
-    /* ---- BOTONES ---- */
-    .btn-rsvp,
-    .btn-open {
-        width: 100%;
-        max-width: 100%;
-        padding: 15px;
-        font-size: 0.9rem;
-        letter-spacing: 1.5px;
-    }
+            /* ---- BOTONES ---- */
+            .btn-rsvp,
+            .btn-open {
+                width: 100%;
+                max-width: 100%;
+                padding: 15px;
+                font-size: 0.9rem;
+                letter-spacing: 1.5px;
+            }
 
-    /* ---- MAPA ---- */
-    iframe {
-        height: 280px !important;
-    }
+            /* ---- MAPA ---- */
+            iframe {
+                height: 280px !important;
+            }
 
-    /* ---- PÉTALOS ---- */
-    .petal {
-        opacity: 0.7;
-    }
-}/* =========================
+            /* ---- PÉTALOS ---- */
+            .petal {
+                opacity: 0.7;
+            }
+        }
+
+        /* =========================
    SOBRE CONTENEDOR
    ========================= */
-.envelope {
-    position: fixed;
-    inset: 0;
-    background:
-        radial-gradient(circle at top, #7a1a25, #630d16 70%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    perspective: 1400px;
-    overflow: hidden;
-}
+        .envelope {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at top, #7a1a25, #630d16 70%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            perspective: 1400px;
+            overflow: hidden;
+        }
 
-/* =========================
+        /* =========================
    CUERPO DEL SOBRE
    ========================= */
-.envelope-back {
-    position: absolute;
-    width: 340px;
-    height: 230px;
-    background:
-        url("https://www.transparenttextures.com/patterns/paper-3.png"),
-        linear-gradient(135deg, #7a1a25, #630d16);
-    border-radius: 10px;
-    box-shadow:
-        0 25px 60px rgba(0,0,0,.45),
-        inset 0 0 0 1px rgba(176,147,90,.4);
-}
+        .envelope-back {
+            position: absolute;
+            width: 340px;
+            height: 230px;
+            background:
+                url("https://www.transparenttextures.com/patterns/paper-3.png"),
+                linear-gradient(135deg, #7a1a25, #630d16);
+            border-radius: 10px;
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, .45),
+                inset 0 0 0 1px rgba(176, 147, 90, .4);
+        }
 
-/* =========================
+        /* =========================
    SOLAPA (IMAGEN)
    ========================= */
-.envelope-flap {
-    position: absolute;
-    width: 340px;
-    top: calc(50% - 120px);
-    transform-origin: top center;
-    transition: transform 1.6s cubic-bezier(.4,0,.2,1);
-    z-index: 6;
-    filter: drop-shadow(0 15px 20px rgba(0,0,0,.45));
-}
+        .envelope-flap {
+            position: absolute;
+            width: 340px;
+            top: calc(50% - 120px);
+            transform-origin: top center;
+            transition: transform 1.6s cubic-bezier(.4, 0, .2, 1);
+            z-index: 6;
+            filter: drop-shadow(0 15px 20px rgba(0, 0, 0, .45));
+        }
 
-.envelope-flap img {
-    width: 100%;
-    display: block;
-    image-rendering: auto;
-    pointer-events: none;
-}
+        .envelope-flap img {
+            width: 100%;
+            display: block;
+            image-rendering: auto;
+            pointer-events: none;
+        }
 
-/* =========================
+        /* =========================
    PAPEL INTERIOR
    ========================= */
-.envelope-paper {
-    position: absolute;
-    width: 300px;
-    height: 180px;
-    background:
-        url("https://www.transparenttextures.com/patterns/paper-3.png"),
-        #fff;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transform: translateY(55px) scale(.95);
-    opacity: 0;
-    transition:
-        transform 1.6s cubic-bezier(.4,0,.2,1),
-        opacity 1.2s ease;
-    z-index: 4;
-    box-shadow: 0 10px 25px rgba(0,0,0,.25);
-}
+        .envelope-paper {
+            position: absolute;
+            width: 300px;
+            height: 180px;
+            background:
+                url("https://www.transparenttextures.com/patterns/paper-3.png"),
+                #fff;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(55px) scale(.95);
+            opacity: 0;
+            transition:
+                transform 1.6s cubic-bezier(.4, 0, .2, 1),
+                opacity 1.2s ease;
+            z-index: 4;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
+        }
 
-.envelope-paper small {
-    letter-spacing: 3px;
-    font-size: .75rem;
-    opacity: .7;
-}
+        .envelope-paper small {
+            letter-spacing: 3px;
+            font-size: .75rem;
+            opacity: .7;
+        }
 
-.envelope-paper h2 {
-    font-size: 1.6rem;
-    letter-spacing: 2px;
-    margin: 6px 0;
-    color: #630d16;
-}
+        .envelope-paper h2 {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            margin: 6px 0;
+            color: #630d16;
+        }
 
-.envelope-paper p {
-    font-size: .9rem;
-    letter-spacing: 2px;
-    opacity: .75;
-}
+        .envelope-paper p {
+            font-size: .9rem;
+            letter-spacing: 2px;
+            opacity: .75;
+        }
 
-/* =========================
+        /* =========================
    ESTADO ABIERTO
    ========================= */
-.envelope.open .envelope-flap {
-    transform: rotateX(180deg);
-}
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
 
-.envelope.open .envelope-paper {
-    transform: translateY(-35px) scale(1);
-    opacity: 1;
-}
+        .envelope.open .envelope-paper {
+            transform: translateY(-35px) scale(1);
+            opacity: 1;
+        }
 
-/* =========================
+        /* =========================
    BRILLO DORADO OPCIONAL ✨
    ========================= */
-.envelope-flap::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        120deg,
-        transparent 30%,
-        rgba(176,147,90,.45),
-        transparent 70%
-    );
-    opacity: 0;
-}
+        .envelope-flap::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg,
+                    transparent 30%,
+                    rgba(176, 147, 90, .45),
+                    transparent 70%);
+            opacity: 0;
+        }
 
-.envelope.open .envelope-flap::after {
-    animation: shine 1.6s ease;
-}
+        .envelope.open .envelope-flap::after {
+            animation: shine 1.6s ease;
+        }
 
-@keyframes shine {
-    0% { opacity: 0; }
-    40% { opacity: 1; }
-    100% { opacity: 0; }
-}
+        @keyframes shine {
+            0% {
+                opacity: 0;
+            }
 
-/* =========================
+            40% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* =========================
    DESAPARECER SOBRE
    ========================= */
-.envelope.hide {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1.2s ease;
-}
+        .envelope.hide {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.2s ease;
+        }
 
-/* =========================
+        /* =========================
    MOBILE 390px
    ========================= */
-@media (max-width: 420px) {
-    .envelope-back {
-        width: 300px;
-        height: 210px;
-    }
+        @media (max-width: 420px) {
+            .envelope-back {
+                width: 300px;
+                height: 210px;
+            }
 
-    .envelope-flap {
-        width: 300px;
-        top: calc(50% - 110px);
-    }
+            .envelope-flap {
+                width: 300px;
+                top: calc(50% - 110px);
+            }
 
-    .envelope-paper {
-        width: 270px;
-        height: 165px;
-    }
-}
-
-
+            .envelope-paper {
+                width: 270px;
+                height: 165px;
+            }
+        }
     </style>
 </head>
 
 <body>
-<div class="envelope" id="invitationCover">
-    <div class="envelope-back"></div>
+    <div class="envelope" id="invitationCover">
+        <div class="envelope-back"></div>
 
-    <!-- SOLAPA CON IMAGEN -->
-    <div class="envelope-flap">
-        <img src="flap.png" alt="Solapa del sobre">
-    </div>
+        <!-- SOLAPA CON IMAGEN -->
+        <div class="envelope-flap">
+            <img src="flap.png" alt="Solapa del sobre">
+        </div>
 
-    <div class="envelope-paper">
-        <small>Save the Date</small>
-        <h2>Coral & Daniel</h2>
-        <p>26 · 04 · 2026</p>
+        <div class="envelope-paper">
+            <small>Save the Date</small>
+            <h2>Coral & Daniel</h2>
+            <p>26 · 04 · 2026</p>
+        </div>
     </div>
-</div>
 
     <header class="hero">
         <div class="hero-overlay"></div>
@@ -1010,8 +1033,8 @@ button, a {
     </section>
 
     <hr style="width: 50px; border: 1px solid var(--color-dorado);">
-<section class="schedule-section">
-        
+    <section class="schedule-section">
+
         <div class="event-card">
             <div class="event-image" style="background-image: url('Siquiero.jpg');"></div>
             <div class="event-info">
@@ -1043,39 +1066,39 @@ button, a {
         </div>
 
     </section>
-<hr style="width: 50px; border: 1px solid var(--color-dorado);">
+    <hr style="width: 50px; border: 1px solid var(--color-dorado);">
 
     <section style="background:
 url('https://www.transparenttextures.com/patterns/paper-3.png'),
 #fdfaf6;">
         <h2>Ubicación</h2>
         <p>Acompáñanos en este lugar especial:</p>
-        <iframe  style="border-radius:14px; width:100%; height:320px;"
+        <iframe style="border-radius:14px; width:100%; height:320px;"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3392.9310855028803!2d-106.4747700243794!3d31.745081974111915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86e75922b1235667%3A0x3e611a20b768aaf5!2sSindicato%20%C3%9Anico%20de%20Trabajadores%20Municipales%20(%20Sal%C3%B3n%20SUTM%20)!5e0!3m2!1ses-419!2smx!4v1767591909835!5m2!1ses-419!2smx"
             allowfullscreen="" loading="lazy"></iframe>
     </section>
     <hr style="width: 50px; border: 1px solid var(--color-dorado);">
 
-   <section class="dress-code">
-    <h2>Código de Vestimenta</h2>
+    <section class="dress-code">
+        <h2>Código de Vestimenta</h2>
 
-    <p class="dress-type">Formal · Etiqueta</p>
+        <p class="dress-type">Formal · Etiqueta</p>
 
-    <p class="dress-note">
-        Para mantener la armonía visual del evento, agradecemos respetar los colores reservados.
-    </p>
+        <p class="dress-note">
+            Para mantener la armonía visual del evento, agradecemos respetar los colores reservados.
+        </p>
 
-    <p class="reserved-title">Colores reservados</p>
+        <p class="reserved-title">Colores reservados</p>
 
-    <div class="dress-code-colors">
-        <div class="color-circle" style="background-color:#002366;" title="Azul marino"></div>
-        <div class="color-circle" style="background-color:#f5f5dc;" title="Beige"></div>
-        <div class="color-circle" style="background-color:#630d16;" title="Vino"></div>
-        <div class="color-circle bride" title="Blanco (Novia)"></div>
-    </div>
+        <div class="dress-code-colors">
+            <div class="color-circle" style="background-color:#002366;" title="Azul marino"></div>
+            <div class="color-circle" style="background-color:#f5f5dc;" title="Beige"></div>
+            <div class="color-circle" style="background-color:#630d16;" title="Vino"></div>
+            <div class="color-circle bride" title="Blanco (Novia)"></div>
+        </div>
 
-    <p class="bride-note">* El color blanco está reservado exclusivamente para la novia.</p>
-</section>
+        <p class="bride-note">* El color blanco está reservado exclusivamente para la novia.</p>
+    </section>
 
     <hr style="width: 50px; border: 1px solid var(--color-dorado);">
     <section class="section-floral" style="background:#f4f1ec;">
@@ -1090,198 +1113,207 @@ url('https://www.transparenttextures.com/patterns/paper-3.png'),
         </div>
     </section>
     <hr style="width: 50px; border: 1px solid var(--color-dorado);">
-<section class="attendance" id="attendance">
-    <h2>¡Te Esperamos!</h2>
+    <section class="attendance" id="attendance">
+        <h2>¡Te Esperamos!</h2>
 
-    <p class="attendance-text" id="attendanceText">
-        Será un honor contar con tu presencia y compartir este momento tan especial.
-    </p>
+        <p class="attendance-text" id="attendanceText">
+            Será un honor contar con tu presencia y compartir este momento tan especial.
+        </p>
 
-    <div class="passes-box" id="passesBox">
-        <p class="passes-label">Esta invitación es para</p>
+        <div class="passes-box" id="passesBox">
+            <p class="passes-label">Esta invitación es para</p>
 
-        <h3 class="family-name" id="familyName">—</h3>
+            <h3 class="family-name" id="familyName">—</h3>
 
-        <p class="passes-count" id="passesCount"></p>
-    </div>
+            <p class="passes-count" id="passesCount"></p>
+        </div>
 
-    <button class="btn-rsvp" id="btnAceptar">
-        Confirmar asistencia
-    </button>
-</section>
+        <button class="btn-rsvp" id="btnAceptar">
+            Confirmar asistencia
+        </button>
+    </section>
 
 
 
     <footer style="padding: 40px; text-align: center; font-size: 0.8rem; color: #888;">
         Coral & Daniel | 2026
     </footer>
-<script>
-/* ===========================
-   COUNTDOWN
-   =========================== */
-const weddingDate = new Date("April 26, 2026 15:00:00").getTime();
+    <script>
+        /* ===========================
+           COUNTDOWN
+           =========================== */
+        const weddingDate = new Date("April 26, 2026 15:00:00").getTime();
 
-function updateElement(id, newValue) {
-    const element = document.getElementById(id);
-    const formatted = String(newValue).padStart(2, '0');
+        function updateElement(id, newValue) {
+            const element = document.getElementById(id);
+            const formatted = String(newValue).padStart(2, '0');
 
-    if (element.textContent !== formatted) {
-        element.textContent = formatted;
-        element.classList.remove('animate-down');
-        void element.offsetWidth;
-        element.classList.add('animate-down');
-    }
-}
+            if (element.textContent !== formatted) {
+                element.textContent = formatted;
+                element.classList.remove('animate-down');
+                void element.offsetWidth;
+                element.classList.add('animate-down');
+            }
+        }
 
-const timer = setInterval(() => {
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
 
-    if (distance < 0) {
-        clearInterval(timer);
-        document.getElementById("timer").textContent = "¡Es hoy!";
-        return;
-    }
-
-    updateElement("days", Math.floor(distance / (1000 * 60 * 60 * 24)));
-    updateElement("hours", Math.floor((distance / (1000 * 60 * 60)) % 24));
-    updateElement("minutes", Math.floor((distance / (1000 * 60)) % 60));
-    updateElement("seconds", Math.floor((distance / 1000) % 60));
-}, 1000);
-
-/* ===========================
-   INVITACIÓN / APERTURA
-   =========================== */
-document.body.style.overflow = "hidden";
-
-window.addEventListener("load", () => {
-    const envelope = document.getElementById("invitationCover");
-
-    // Pequeña pausa elegante
-    setTimeout(() => {
-        envelope.classList.add("open");
-    }, 1200);
-
-    // Desaparece suavemente
-    setTimeout(() => {
-        envelope.classList.add("hide");
-        document.body.style.overflow = "auto";
-    }, 3400);
-});
-/* ===========================
-   PÉTALOS
-   =========================== */
-let petalInterval = null;
-
-function createPetal() {
-    const petal = document.createElement('div');
-    petal.className = 'petal';
-
-    const size = Math.random() * 14 + 10;
-    petal.style.width = size + 'px';
-    petal.style.height = size + 'px';
-    petal.style.left = Math.random() * 100 + 'vw';
-
-    const colors = ['#630d16', '#ff7f50', '#f8ad9d', '#e5989b'];
-    petal.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-    const duration = Math.random() * 5 + 6;
-    petal.style.animationDuration = duration + 's';
-    petal.style.animationDelay = Math.random() * 1.5 + 's';
-    petal.style.filter = `blur(${Math.random() * 2}px)`;
-
-    document.body.appendChild(petal);
-
-    setTimeout(() => petal.remove(), (duration + 2) * 1000);
-}
-
-function startPetals() {
-    if (petalInterval) return;
-
-    const isMobile = window.innerWidth < 600;
-    const interval = isMobile ? 550 : 300; // menos pétalos en móvil
-
-    petalInterval = setInterval(createPetal, interval);
-}
-
-
-const params = new URLSearchParams(window.location.search);
-const familia = params.get("familia");
-
-const familyName = document.getElementById("familyName");
-const passesCount = document.getElementById("passesCount");
-const btnAceptar = document.getElementById("btnAceptar");
-const attendanceText = document.getElementById("attendanceText");
-const passesBox = document.getElementById("passesBox");
-
-if (!familia) {
-    attendanceText.textContent = "Invitación no válida.";
-    btnAceptar.style.display = "none";
-    passesBox.style.display = "none";
-} else {
-    fetch("invitados.json")
-        .then(res => res.json())
-        .then(data => {
-            const invitado = data.find(i => i.Familia === familia);
-
-            if (!invitado) {
-                attendanceText.textContent = "Invitación no encontrada.";
-                btnAceptar.style.display = "none";
-                passesBox.style.display = "none";
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("timer").textContent = "¡Es hoy!";
                 return;
             }
 
-            familyName.textContent = invitado.Familia;
-            passesCount.innerHTML = `Tienen <strong>${invitado.Pases}</strong> pases reservados`;
+            updateElement("days", Math.floor(distance / (1000 * 60 * 60 * 24)));
+            updateElement("hours", Math.floor((distance / (1000 * 60 * 60)) % 24));
+            updateElement("minutes", Math.floor((distance / (1000 * 60)) % 60));
+            updateElement("seconds", Math.floor((distance / 1000) % 60));
+        }, 1000);
 
-            if (invitado.Acepto) {
-                mostrarGracias();
-            } else {
-                btnAceptar.style.display = "inline-block";
-            }
+        /* ===========================
+           INVITACIÓN / APERTURA
+           =========================== */
+        document.body.style.overflow = "hidden";
 
-            btnAceptar.addEventListener("click", () => aceptarInvitacion(invitado.Familia));
+        window.addEventListener("load", () => {
+            const envelope = document.getElementById("invitationCover");
+
+            // Pequeña pausa elegante
+            setTimeout(() => {
+                envelope.classList.add("open");
+            }, 1200);
+
+            // Desaparece suavemente
+            setTimeout(() => {
+                envelope.classList.add("hide");
+                document.body.style.overflow = "auto";
+            }, 3400);
         });
-}
+        /* ===========================
+           PÉTALOS
+           =========================== */
+        let petalInterval = null;
 
-function mostrarGracias() {
-    attendanceText.innerHTML = `
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+
+            const size = Math.random() * 14 + 10;
+            petal.style.width = size + 'px';
+            petal.style.height = size + 'px';
+            petal.style.left = Math.random() * 100 + 'vw';
+
+            const colors = ['#630d16', '#ff7f50', '#f8ad9d', '#e5989b'];
+            petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+            const duration = Math.random() * 5 + 6;
+            petal.style.animationDuration = duration + 's';
+            petal.style.animationDelay = Math.random() * 1.5 + 's';
+            petal.style.filter = `blur(${Math.random() * 2}px)`;
+
+            document.body.appendChild(petal);
+
+            setTimeout(() => petal.remove(), (duration + 2) * 1000);
+        }
+
+        function startPetals() {
+            if (petalInterval) return;
+
+            const isMobile = window.innerWidth < 600;
+            const interval = isMobile ? 550 : 300; // menos pétalos en móvil
+
+            petalInterval = setInterval(createPetal, interval);
+        }
+
+
+        const params = new URLSearchParams(window.location.search);
+        const familia = params.get("familia");
+
+        const familyName = document.getElementById("familyName");
+        const passesCount = document.getElementById("passesCount");
+        const btnAceptar = document.getElementById("btnAceptar");
+        const attendanceText = document.getElementById("attendanceText");
+        const passesBox = document.getElementById("passesBox");
+
+        if (!familia) {
+            attendanceText.textContent = "Invitación no válida.";
+            btnAceptar.style.display = "none";
+            passesBox.style.display = "none";
+        } else {
+            fetch("invitados.json")
+                .then(res => res.json())
+                .then(data => {
+                    const invitado = data.find(i => i.Familia === familia);
+
+                    if (!invitado) {
+                        attendanceText.textContent = "Invitación no encontrada.";
+                        btnAceptar.style.display = "none";
+                        passesBox.style.display = "none";
+                        return;
+                    }
+
+                    familyName.textContent = invitado.Familia;
+                    passesCount.innerHTML = `Tienen <strong>${invitado.Pases}</strong> pases reservados`;
+
+                    if (invitado.Acepto) {
+                        mostrarGracias();
+                    } else {
+                        btnAceptar.style.display = "inline-block";
+                    }
+
+                    btnAceptar.addEventListener("click", () => aceptarInvitacion(invitado.Familia));
+                });
+        }
+
+        function mostrarGracias() {
+            attendanceText.innerHTML = `
         💖 Gracias por aceptar nuestra invitación.<br>
         Por favor recuerda la fecha.<br>
         Será un honor contar con ustedes.
     `;
-    btnAceptar.style.display = "none";
-}
-
-function aceptarInvitacion(familia) {
-    fetch("api.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ familia })
-    })
-    .then(res => res.json())
-    .then(res => {
-        if (res.ok) {
-            crearEventoCalendario();
-            mostrarGracias();
+            btnAceptar.style.display = "none";
         }
-    });
-}
 
-/* ===== CALENDARIO ===== */
-function crearEventoCalendario() {
-    const inicio = "20260426T150000";
-    const fin = "20260426T230000";
+        function aceptarInvitacion(familia) {
+            fetch("/.netlify/functions/aceptarInvitacion", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ familia })
+            })
+                .then(res => res.json())
+                .then(res => {
+                    if (res.ok) {
+                        crearEventoCalendario();
+                        mostrarGracias();
+                    } else {
+                        alert(res.message || "No se pudo confirmar la invitación");
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Error de conexión");
+                });
+        }
 
-    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE
+
+        /* ===== CALENDARIO ===== */
+        function crearEventoCalendario() {
+            const inicio = "20260426T150000";
+            const fin = "20260426T230000";
+
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE
         &text=Boda+Daniel+Ochoa
         &dates=${inicio}/${fin}
         &details=Recordatorio+de+la+boda+de+Daniel+Ochoa
         &reminders=useDefault,false&reminderMinutes=20160`;
 
-    window.open(url.replace(/\s/g, ""), "_blank");
-}
-</script>
+            window.open(url.replace(/\s/g, ""), "_blank");
+        }
+    </script>
 
 
 </body>
