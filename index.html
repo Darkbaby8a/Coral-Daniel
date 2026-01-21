@@ -984,6 +984,88 @@
                 height: 165px;
             }
         }
+        .wedding-section {
+    min-height: 100vh;
+    padding: 120px 20px;
+    text-align: center;
+    background: #f7f1f1;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.wedding-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Título */
+.wedding-section h2 {
+    font-size: 42px;
+    color: #7a4a4a;
+    margin-bottom: 60px;
+    font-style: italic;
+}
+
+/* Padres */
+.parents p {
+    font-size: 18px;
+    color: #5a3a3a;
+    margin-bottom: 14px;
+    line-height: 1.6;
+}
+
+.parents strong {
+    display: block;
+    margin-top: 30px;
+    letter-spacing: 1px;
+    font-size: 16px;
+    color: #7a4a4a;
+}
+
+/* Versículo */
+.verse {
+    margin-top: 80px;
+    font-size: 18px;
+    font-style: italic;
+    color: #6b4a4a;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+}
+
+.verse span {
+    display: block;
+    margin-top: 12px;
+    font-size: 15px;
+    opacity: 0.8;
+}
+
+/* EFECTO AGUA */
+.wedding-section::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center,
+        rgba(255,255,255,0.35) 0%,
+        rgba(255,255,255,0.15) 20%,
+        transparent 60%);
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.wedding-section.visible::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
     </style>
 </head>
 
@@ -1020,19 +1102,24 @@
         </div>
     </header>
 
-    <section>
-        <h2>Nuestra Boda</h2>
-        <div class="lorem-text">
-            Padres
-            Ascencion Ochoa
-            Ines Covarrubias
-            Norma Leticia Contreras
-            Rene Hamlet Gonzalez
-        </div>
-        <div class="lorem-text">
-            "Y deberas te comprometere conmigo para tiempo indefinido [..] Y de Veras te comprometere conmigo en fidelidad" (Osesas 2:19a, 20a)
-        </div>
-    </section>
+   <section class="wedding-section">
+    <h2>Nuestra Boda</h2>
+
+    <div class="parents">
+        <p><strong>Padres del Novio</strong></p>
+        <p>Ascención Ochoa<br>Inés Covarrubias</p>
+
+        <p><strong>Padres de la Novia</strong></p>
+        <p>Norma Leticia Contreras<br>René Hamlet González</p>
+    </div>
+
+    <div class="verse">
+        “Y de veras te comprometeré conmigo para tiempo indefinido…<br>
+        sí, de veras te comprometeré conmigo en fidelidad.”<br>
+        <span>Oseas 2:19–20</span>
+    </div>
+</section>
+
 
     <hr style="width: 50px; border: 1px solid var(--color-dorado);">
 <section class="schedule-section">
@@ -1183,41 +1270,68 @@ url('https://www.transparenttextures.com/patterns/paper-3.png'),
                 document.body.style.overflow = "auto";
             }, 3400);
         });
-        /* ===========================
-           PÉTALOS
-           =========================== */
-        let petalInterval = null;
+       /* ===========================
+   WEDDING SECTION OBSERVER
+   =========================== */
+const section = document.querySelector('.wedding-section');
 
-        function createPetal() {
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-
-            const size = Math.random() * 14 + 10;
-            petal.style.width = size + 'px';
-            petal.style.height = size + 'px';
-            petal.style.left = Math.random() * 100 + 'vw';
-
-            const colors = ['#630d16', '#ff7f50', '#f8ad9d', '#e5989b'];
-            petal.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-            const duration = Math.random() * 5 + 6;
-            petal.style.animationDuration = duration + 's';
-            petal.style.animationDelay = Math.random() * 1.5 + 's';
-            petal.style.filter = `blur(${Math.random() * 2}px)`;
-
-            document.body.appendChild(petal);
-
-            setTimeout(() => petal.remove(), (duration + 2) * 1000);
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            section.classList.add('visible');
         }
+    });
+}, { threshold: 0.3 });
 
-        function startPetals() {
-            if (petalInterval) return;
+observer.observe(section);
 
-            const isMobile = window.innerWidth < 600;
-            const interval = isMobile ? 550 : 300; // menos pétalos en móvil
+/* ===========================
+   PÉTALOS OPTIMIZADOS
+   =========================== */
+let petalInterval = null;
 
-            petalInterval = setInterval(createPetal, interval);
-        }
+function createPetal() {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+
+    const size = Math.random() * 10 + 8;
+    petal.style.width = size + 'px';
+    petal.style.height = size + 'px';
+    petal.style.left = Math.random() * 100 + 'vw';
+
+    const colors = ['#630d16', '#ff7f50', '#f8ad9d', '#e5989b'];
+    petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+    const duration = Math.random() * 4 + 6;
+    petal.style.animationDuration = duration + 's';
+
+    document.body.appendChild(petal);
+
+    setTimeout(() => petal.remove(), duration * 1000);
+}
+
+function startPetals() {
+    if (petalInterval) return;
+
+    const isMobile = window.innerWidth < 768;
+    const interval = isMobile ? 900 : 500;
+
+    petalInterval = setInterval(createPetal, interval);
+}
+
+/* ===========================
+   INICIAR DESPUÉS DEL SOBRE
+   =========================== */
+window.addEventListener("load", () => {
+    const envelope = document.getElementById("invitationCover");
+
+    setTimeout(() => envelope.classList.add("open"), 1200);
+    setTimeout(() => {
+        envelope.classList.add("hide");
+        document.body.style.overflow = "auto";
+        startPetals(); // 👈 AQUÍ SE ACTIVAN
+    }, 3400);
+});
 
 
 const params = new URLSearchParams(window.location.search);
