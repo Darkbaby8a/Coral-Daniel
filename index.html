@@ -1073,6 +1073,180 @@
     opacity: 1;
     transform: scale(1);
 }
+        .wedding-section {
+    min-height: 100vh;
+    padding: 100px 20px;
+    text-align: center;
+    background: radial-gradient(circle at center, #fff 0%, #fdfbf7 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Marco Dorado Decorativo */
+.ornamental-frame {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border: 2px solid var(--dorado);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.ornamental-frame::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    width: 100%;
+}
+
+/* Título */
+.wedding-section h2 {
+    
+    font-size: 68px;
+    color: var(--vino);
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(93, 16, 29, 0.1);
+    line-height: 1.2;
+}
+
+/* Separador Dorado */
+.separator-gold {
+    font-size: 24px;
+    color: var(--dorado);
+    margin: 20px 0 50px;
+    opacity: 0.8;
+}
+
+/* Layout de Padres */
+.parents-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.parents-group {
+    flex: 1;
+    min-width: 280px;
+}
+
+.role {
+    
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--dorado);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.name {
+    font-size: 22px;
+    color: var(--vino-claro);
+    margin: 10px 0;
+    font-weight: 400;
+}
+
+/* Línea vertical decorativa entre padres (solo escritorio) */
+.divider-vertical {
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--dorado), transparent);
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .divider-vertical {
+        display: block;
+    }
+}
+
+/* Versículo */
+.verse {
+    margin-top: 60px;
+    padding: 40px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(93, 16, 29, 0.05);
+    border-radius: 4px; /* Borde muy sutil */
+    border-top: 3px solid var(--vino);
+    position: relative;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quote-mark {
+    
+    font-size: 60px;
+    color: var(--dorado);
+    line-height: 0;
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    opacity: 0.4;
+}
+
+.verse p {
+    font-size: 18px;
+    font-style: italic;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.bible-ref {
+    
+    font-size: 13px;
+    color: var(--vino);
+    letter-spacing: 2px;
+    font-weight: 600;
+    display: block;
+}
+
+/* --- ANIMACIONES --- */
+/* Estado inicial de los elementos a animar */
+.reveal-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+}
+
+/* Clase activa cuando el JS la detecta */
+.reveal-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efecto de fondo sutil con partículas doradas (pseudo-elemento) */
+.wedding-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        radial-gradient(var(--dorado) 1px, transparent 1px),
+        radial-gradient(var(--dorado) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+    opacity: 0.05;
+    z-index: 0;
+}
 
     </style>
 </head>
@@ -1110,21 +1284,35 @@
         </div>
     </header>
 
-   <section class="wedding-section">
-    <h2>Nuestra Boda</h2>
+  <section class="wedding-section">
+    <div class="ornamental-frame"></div>
 
-    <div class="parents">
-        <p><strong>Padres del Novio</strong></p>
-        <p>Ascención Ochoa<br>Inés Covarrubias</p>
+    <div class="content-wrapper">
+        <h2 class="reveal-item">Nuestra Boda</h2>
+        <div class="separator-gold reveal-item">✦</div>
 
-        <p><strong>Padres de la Novia</strong></p>
-        <p>Norma Leticia Contreras<br>René Hamlet González</p>
-    </div>
+        <div class="parents-container">
+            <div class="parents-group reveal-item">
+                <p class="role">Padres del Novio</p>
+                <h3 class="name">Ascención Ochoa</h3>
+                <h3 class="name">Inés Covarrubias</h3>
+            </div>
 
-    <div class="verse">
-        “Y de veras te comprometeré conmigo para tiempo indefinido…<br>
-        sí, de veras te comprometeré conmigo en fidelidad.”<br>
-        <span>Oseas 2:19–20</span>
+            <div class="divider-vertical reveal-item"></div>
+
+            <div class="parents-group reveal-item">
+                <p class="role">Padres de la Novia</p>
+                <h3 class="name">Norma Leticia Contreras</h3>
+                <h3 class="name">René Hamlet González</h3>
+            </div>
+        </div>
+
+        <div class="verse reveal-item">
+            <span class="quote-mark">“</span>
+            <p>Y de veras te comprometeré conmigo para tiempo indefinido…<br>
+            sí, de veras te comprometeré conmigo en fidelidad.</p>
+            <span class="bible-ref">Oseas 2:19–20</span>
+        </div>
     </div>
 </section>
 
