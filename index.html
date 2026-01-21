@@ -103,19 +103,24 @@
         /* ===========================
    HERO
    =========================== */
-        .hero {
-            position: relative;
-            height: 100vh;
-            background: url('PRY_6632.jpg') bottom/cover no-repeat fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-        }
-        @media (min-width: 768px) {
-             background: url('FotoPrincipal.jpg') bottom/cover no-repeat fixed !important;
-        }
+      .hero {
+    position: relative;
+    height: 100vh;
+    background: url('PRY_6632.jpg') bottom/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+/* ESCRITORIO */
+@media (min-width: 768px) {
+    .hero {
+        background: url('FotoPrincipal.jpg') bottom/cover no-repeat;
+    }
+}
+
 
         .hero-overlay {
             position: absolute;
