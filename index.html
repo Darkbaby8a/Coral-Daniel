@@ -106,14 +106,28 @@
         .hero {
             position: relative;
             height: 100vh;
-            background: url('FotoPrincipal.jpg') bottom/cover no-repeat fixed;
+            background: url('PRY_6632.jpg') bottom/cover no-repeat fixed;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
         }
+body {
+width: 100%;
+max-width: 100%;
+}
 
+
+/* ESCRITORIO: estilo móvil centrado */
+@media (min-width: 768px) {
+body {
+width: 30vw;
+max-width: 420px;
+box-shadow: 0 0 40px rgba(0,0,0,0.08);
+background: #f6f1ea;
+}
+}
         .hero-overlay {
             position: absolute;
             inset: 0;
