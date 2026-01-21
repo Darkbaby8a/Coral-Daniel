@@ -1249,6 +1249,134 @@ html {
     opacity: 0.05;
     z-index: 0;
 }
+        /* --- ESTILOS DE LA SECCIÓN DE REGALOS --- */
+.gifts-section {
+    position: relative;
+    padding: 120px 20px;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* Imagen de fondo Parallax */
+.parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* URL de una foto elegante (flores, boda, texturas) */
+    background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop'); 
+    background-attachment: fixed; /* Efecto Parallax clave */
+    background-position: center;
+    background-size: cover;
+    z-index: 0;
+}
+
+/* Capa oscura (Overlay) */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(45, 10, 15, 0.85); /* Tinte color vino oscuro */
+    z-index: 1;
+}
+
+.gifts-content {
+    position: relative;
+    z-index: 2; /* Encima del overlay */
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Tipografía */
+.gifts-section h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 60px;
+    color: var(--dorado, #D4AF37);
+    margin-bottom: 10px;
+}
+
+.intro-text {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 50px;
+    font-family: 'Playfair Display', serif;
+    color: #f0f0f0;
+}
+
+/* Contenedor de Tarjetas */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* Diseño de la Tarjeta Individual */
+.gift-card {
+    background: rgba(255, 255, 255, 0.05); /* Efecto cristal muy sutil */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(212, 175, 55, 0.3); /* Borde dorado tenue */
+    padding: 40px 30px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 280px;
+    max-width: 400px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.gift-card:hover {
+    transform: translateY(-10px); /* Levantar tarjeta al pasar mouse */
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--dorado, #D4AF37);
+}
+
+/* Iconos SVG */
+.icon-box {
+    margin-bottom: 20px;
+}
+
+.icon-box svg {
+    width: 50px;
+    height: 50px;
+    stroke: var(--dorado, #D4AF37); /* Color de las líneas del icono */
+    opacity: 0.9;
+}
+
+.gift-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    color: var(--dorado, #D4AF37);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.gift-card p {
+    font-size: 15px;
+    color: #ddd;
+    line-height: 1.6;
+}
+
+.footer-note {
+    margin-top: 50px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 32px;
+    color: rgba(255,255,255,0.7);
+}
+
+/* Ajuste móvil */
+@media (max-width: 768px) {
+    .parallax-bg {
+        background-attachment: scroll; /* Parallax no funciona bien en algunos móviles */
+    }
+    .gifts-section h2 {
+        font-size: 48px;
+    }
+}
 
     </style>
 </head>
@@ -1322,15 +1450,28 @@ html {
     <hr style="width: 50px; border: 1px solid var(--color-dorado);">
 <section class="schedule-section">
         
-        <div class="event-card">
-            <div class="event-image" style="background-image: url('PRY_6779.jpg');"></div>
-            <div class="event-info">
-                <span>3:00 PM</span>
-                <h3>Conferencia biblica</h3>
-                <p>Una ceremonia íntima frente al altar donde uniremos nuestras vidas para siempre.</p>
-                <p><b>Lugar:</b> Salon del Reino de los Tesigos de Jehova Congregacion Nueva Zelanda</p>
-            </div>
-        </div>
+<div class="event-card">
+    <div class="event-image" style="background-image: url('PRY_6779.jpg');"></div>
+    <div class="event-info">
+        <span>3:00 PM</span>
+        <h3>Conferencia Bíblica</h3>
+
+        <p>
+            Un momento especial en el que, con base en las Escrituras,
+            compartiremos un mensaje que marcará el inicio de nuestra vida juntos.
+        </p>
+
+        <p>
+            <b>Lugar:</b> Salón del Reino de los Testigos de Jehová<br>
+            Congregación Nueva Zelanda
+        </p>
+
+        <p class="event-address">
+            C. Ceilán 6311A, 32690 Juárez, Chih.
+        </p>
+    </div>
+</div>
+
 
         <div class="event-card">
             <div class="event-image" style="background-image: url('PRY_6687.jpg');"></div>
@@ -1390,6 +1531,50 @@ url('https://www.transparenttextures.com/patterns/paper-3.png'),
             <img src="PRY_6760.jpg" style="object-position: right;">
         </div>
     </section>
+<section class="gifts-section" id="gifts">
+    <div class="parallax-bg"></div>
+    
+    <div class="overlay"></div>
+
+    <div class="gifts-content">
+        <h2 class="reveal-item">Mesa de Regalos</h2>
+        
+        <div class="separator-gold reveal-item">✦</div>
+        
+        <p class="intro-text reveal-item">
+            Lo más importante para nosotros es contar con su compañía en este día tan especial.
+        </p>
+
+        <div class="cards-container">
+            <div class="gift-card reveal-item">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </div>
+                <h3>Lluvia de Sobres</h3>
+                <p>Si desean hacernos un presente en efectivo, encontrarán un buzón especial en la recepción.</p>
+            </div>
+
+            <div class="gift-card reveal-item">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <polyline points="20 12 20 22 4 22 4 12"/>
+                        <rect x="2" y="7" width="20" height="5"/>
+                        <line x1="12" y1="22" x2="12" y2="7"/>
+                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+                    </svg>
+                </div>
+                <h3>Regalos</h3>
+                <p>También dispondremos de una mesa para colocar cualquier obsequio que deseen entregarnos.</p>
+            </div>
+        </div>
+        
+        <p class="footer-note reveal-item">¡Gracias por el detalle!</p>
+    </div>
+</section>
     <hr style="width: 50px; border: 1px solid var(--color-dorado);">
 <section class="attendance" id="attendance">
     <h2>¡Te Esperamos!</h2>
