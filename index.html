@@ -1645,6 +1645,30 @@ END:VCALENDAR
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 }
+        // Seleccionamos todos los elementos que queremos animar
+const revealElements = document.querySelectorAll('.reveal-item');
+
+const observerOptions = {
+    threshold: 0.15, // Se activa cuando el 15% del elemento es visible
+    rootMargin: "0px"
+};
+
+const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            // Agregamos un pequeño retraso (delay) basado en el índice
+            // para crear el efecto cascada
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+            }, index * 200); // 200ms de diferencia entre cada elemento
+            
+            // Dejar de observar una vez animado
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+revealElements.forEach(el => revealObserver.observe(el));
 
     </script>
 
