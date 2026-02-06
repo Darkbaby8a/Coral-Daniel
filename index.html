@@ -1831,7 +1831,7 @@ if (!familia) {
 
       const invitado = res.invitado;
 
-      familyName.textContent = invitado.Familia;
+      familyName.textContent = invitado.nombre;
       passesCount.innerHTML = `Tienen <strong>${invitado.Pases}</strong> pases reservados`;
 
       if (invitado.Acepto) {
@@ -1842,7 +1842,7 @@ if (!familia) {
       }
 
       btnAceptar.addEventListener("click", () =>
-        aceptarInvitacion(invitado.Familia)
+        aceptarInvitacion(familia)
       );
     })
     .catch(() => {
