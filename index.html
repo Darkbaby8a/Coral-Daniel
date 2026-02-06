@@ -1672,7 +1672,7 @@ url('https://www.transparenttextures.com/patterns/paper-3.png'),
 
         <p class="passes-count" id="passesCount"></p>
     </div>
-<div id="qrContainer" class="qr-box">
+<div id="qrContainer" class="qr-box" style='display:none;'> 
     <p class="qr-title">Este será su pase de entrada</p>
     <div class="qr-frame">
         <div id="qrCode"></div>
@@ -1891,15 +1891,15 @@ if (!familia) {
   const ics = `
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Boda Daniel Ochoa//ES
+PRODID:-//Boda Coral & Daniel//ES
 BEGIN:VEVENT
-UID:boda-daniel-ochoa-2026@example.com
+UID:boda-Coral-Daniel-2026@example.com
 DTSTAMP:20260101T000000Z
 DTSTART:20260426T150000
 DTEND:20260426T230000
-SUMMARY:Boda Daniel Ochoa
-DESCRIPTION:Recordatorio de la boda de Daniel Ochoa
-LOCATION:Salón de Eventos
+SUMMARY:Boda Coral & Daniel
+DESCRIPTION:Recordatorio de la boda de Coral & Daniel
+LOCATION:Salón de Eventos SUTM
 BEGIN:VALARM
 TRIGGER:-P14D
 ACTION:DISPLAY
@@ -1946,7 +1946,7 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
         		function generarQR(familia) {
   const qrData = JSON.stringify({
     familia: familia,
-    evento: "Boda Iveth & Cesar",
+    evento: "Boda Coral & Daniel",
     tipo: "PASE_ENTRADA"
   });
 
