@@ -50,9 +50,22 @@ export const handler = async (event) => {
     };
   } catch (error) {
     console.error(error);
+     const result2 = await pool.query(
+      `
+     SELECT
+  column_name,
+  data_type,
+  is_nullable
+FROM information_schema.columns
+WHERE table_schema = 'public'
+  AND table_name = 'invitados'
+ORDER BY ordinal_position;
+      `
+    );
+
     return {
       statusCode: 500,
-      body: JSON.stringify({ ok: false, error: error.message }),
+      body: JSON.stringify({ ok: false, error: error.message,result:result2 }),
     };
   }
 };
