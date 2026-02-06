@@ -22,7 +22,7 @@ export const handler = async (event) => {
   try {
     const result = await pool.query(
       `
-      SELECT familia, pases, acepto, nombremostrar
+      SELECT familia, pases, acepto, DisplayName
       FROM public.invitados
       WHERE familia = $1
       LIMIT 1;
@@ -42,7 +42,7 @@ export const handler = async (event) => {
       body: JSON.stringify({
         ok: true,
         invitado: {
-          Familia: result.rows[0].nombremostrar,
+          Familia: result.rows[0].DisplayName,
           Pases: result.rows[0].pases,
           Acepto: result.rows[0].acepto,
         },
