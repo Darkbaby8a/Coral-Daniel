@@ -867,15 +867,14 @@ html {
         /* =========================
    SOLAPA (IMAGEN)
    ========================= */
-        .envelope-flap {
-            position: absolute;
-            width: 340px;
-            top: calc(50% - 120px);
-            transform-origin: top center;
-            transition: transform 1.6s cubic-bezier(.4, 0, .2, 1);
-            z-index: 6;
-            filter: drop-shadow(0 15px 20px rgba(0, 0, 0, .45));
-        }
+.envelope-flap {
+    position: absolute;
+    width: 340px;
+    top: calc(50% - 120px);
+    z-index: 6;
+    filter: drop-shadow(0 15px 20px rgba(0, 0, 0, .45));
+    pointer-events: none;
+}
 
         .envelope-flap img {
             width: 100%;
@@ -887,26 +886,31 @@ html {
         /* =========================
    PAPEL INTERIOR
    ========================= */
-        .envelope-paper {
-            position: absolute;
-            width: 300px;
-            height: 180px;
-            background:
-                url("https://www.transparenttextures.com/patterns/paper-3.png"),
-                #fff;
-            border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transform: translateY(55px) scale(.95);
-            opacity: 0;
-            transition:
-                transform 1.6s cubic-bezier(.4, 0, .2, 1),
-                opacity 1.2s ease;
-            z-index: 4;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
-        }
+.envelope-paper {
+    position: absolute;
+    width: 300px;
+    height: 180px;
+    background:
+        url("https://www.transparenttextures.com/patterns/paper-3.png"),
+        #fff;
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* INICIA OCULTO DENTRO DEL SOBRE */
+    transform: translateY(60px);
+    opacity: 0;
+
+    transition:
+        transform 1.4s cubic-bezier(.22, 1, .36, 1),
+        opacity 1s ease;
+
+    z-index: 4;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .28);
+}
 
         .envelope-paper small {
             letter-spacing: 3px;
@@ -930,14 +934,12 @@ html {
         /* =========================
    ESTADO ABIERTO
    ========================= */
-        .envelope.open .envelope-flap {
-            transform: rotateX(180deg);
-        }
 
-        .envelope.open .envelope-paper {
-            transform: translateY(-35px) scale(1);
-            opacity: 1;
-        }
+
+.envelope.open .envelope-paper {
+    transform: translateY(-40px);
+    opacity: 1;
+}
 
         /* =========================
    BRILLO DORADO OPCIONAL ✨
