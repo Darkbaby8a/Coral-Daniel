@@ -73,7 +73,81 @@ html {
             color: var(--texto);
             scroll-behavior: smooth;
         }
+/* ===========================
+   QR / PASE DE ENTRADA
+   =========================== */
+.qr-box {
+    margin-top: 50px;
+    padding: 35px 30px;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
 
+    background:
+        url("https://www.transparenttextures.com/patterns/paper-3.png"),
+        rgba(255, 255, 255, 0.95);
+
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(99, 13, 22, 0.25);
+    border: 1px solid rgba(176, 147, 90, 0.4);
+
+    text-align: center;
+    animation: fadeUp 1s ease forwards;
+}
+
+.qr-title {
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--vino);
+    margin-bottom: 18px;
+}
+
+.qr-frame {
+    padding: 18px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #fff, #f7f1ea);
+    box-shadow: inset 0 0 0 2px rgba(176, 147, 90, 0.35);
+    display: inline-block;
+}
+
+#qrCode img,
+#qrCode canvas {
+    width: 180px !important;
+    height: 180px !important;
+}
+
+.qr-note {
+    margin-top: 18px;
+    font-size: 0.85rem;
+    opacity: 0.75;
+    letter-spacing: 1px;
+}
+
+/* Animación sutil */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Móvil */
+@media (max-width: 480px) {
+    .qr-box {
+        padding: 28px 20px;
+    }
+
+    #qrCode img,
+    #qrCode canvas {
+        width: 150px !important;
+        height: 150px !important;
+    }
+}
         /* ===========================
    TIPOGRAFÍA
    =========================== */
@@ -1487,8 +1561,8 @@ html {
             <div class="event-info">
                 <span>6:00 PM</span>
                 <h3>Recepcion</h3>
-                <p>Celebremos el primer momento como esposos con un baile y música suave.</p>
-                <p><b>Lugar:</b> Salon de Eventos SUTM</p>
+              <p>Celebramos el inicio de nuestra vida juntos y nos encantaría compartirlo contigo en una velada de música, baile y gratos momentos.</p>
+            <p><b>Lugar:</b> Salón de Eventos SUTM</p>
             </div>
         </div>
 
@@ -1598,7 +1672,13 @@ url('https://www.transparenttextures.com/patterns/paper-3.png'),
 
         <p class="passes-count" id="passesCount"></p>
     </div>
-
+<div id="qrContainer" class="qr-box">
+    <p class="qr-title">Este será su pase de entrada</p>
+    <div class="qr-frame">
+        <div id="qrCode"></div>
+    </div>
+    <p class="qr-note">Presente este código al ingresar</p>
+</div>
     <button class="btn-rsvp" id="btnAceptar">
         Confirmar asistencia
     </button>
@@ -1756,6 +1836,7 @@ if (!familia) {
 
       if (invitado.Acepto) {
         mostrarGracias();
+          generarQR();
       } else {
         btnAceptar.style.display = "inline-block";
       }
@@ -1793,7 +1874,7 @@ if (!familia) {
                 .then(res => {
                     if (res.ok) {
                         crearEventoCalendario();
-                        mostrarGracias();
+                        mostrarGracias();generarQR();
                     } else {
                         alert(res.message || "No se pudo confirmar la invitación");
                     }
@@ -1862,6 +1943,21 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
         }
     });
 }, observerOptions);
+        		function generarQR(familia) {
+  const qrData = JSON.stringify({
+    familia: familia,
+    evento: "Boda Iveth & Cesar",
+    tipo: "PASE_ENTRADA"
+  });
+
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(qrData)}`;
+
+  const qrContainer = document.getElementById("qrContainer");
+  const qrCode = document.getElementById("qrCode");
+
+  qrCode.innerHTML = `<img src="${qrUrl}" alt="QR Pase de Entrada">`;
+  qrContainer.style.display = "block";
+}
 
 revealElements.forEach(el => revealObserver.observe(el));
 
