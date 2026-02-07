@@ -261,7 +261,7 @@ function buscarFamilia() {
 
 /* ---------- CARGAR INVITADO ---------- */
 function cargarInvitado(familia) {
-  fetch(`/.netlify/functions/obtener-invitado?familia=${encodeURIComponent(familia)}`)
+  fetch(`/.netlify/functions/obtener-invitado-nombre?displayname=${encodeURIComponent(familia)}`)
     .then(r => r.json())
     .then(r => {
       if (!r.ok) return alert("No encontrado");
