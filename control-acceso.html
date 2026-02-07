@@ -257,7 +257,54 @@ function mostrar(id, btn) {
   document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   if (btn) btn.classList.add("active");
+  if(id=="lista"){
+  }
 }
+  function iniciarQR() {
+  if (qrScanner) return;
+  qrScanner = new Html5Qrcode("reader");
+  qrScanner.start({ facingMode: "environment" }, { fps: 10, qrbox: 250 }, txt => {
+    try {
+      const d = JSON.parse(txt);
+      buscarInvitado(d.familia);
+      qrScanner.stop();
+    } catch { alert("QR inválido"); }
+  });
+}
+
+/* ===== BUSCAR ===== */
+function buscar() {
+  const v = familiaManual.value.trim();
+  if (v) buscarInvitado(v);
+}
+  
+function buscarInvitado(nombre) {
+  fetch(`/.netlify/functions/obtener-invitado-nombre?displayname=${encodeURIComponent(nombre)}`)
+    .then(r => r.json())
+    .then(r => {
+      if (!r.ok) return alert("No encontrado");
+
+      if (r.invitados.length === 1) {
+        seleccionar(r.invitados[0]);
+        return;
+      }
+
+      mostrar("resultados");
+      listaResultados.innerHTML = "";
+      r.invitados.forEach(i => {
+        listaResultados.innerHTML += `
+          <div class="result-item" onclick='seleccionar(${JSON.stringify(i)})'>
+            <strong>${i.displayname}</strong><br>
+            Familia: ${i.familia}<br>
+            Disponibles:
+            <span class="${i.disponibles > 0 ? "disponibles-ok" : "disponibles-cero"}">
+              ${i.disponibles}
+            </span>
+          </div>`;
+      });
+    });
+}
+
 
 /* ===== BUSCAR ===== */
 function buscar() {
@@ -320,6 +367,21 @@ function registrar() {
       pasesUsar.value = "";
     }
   });
+  function cargarLista() {
+  fetch("/.netlify/functions/listar-invitados")
+    .then(r => r.json())
+    .then(r => {
+      if (!r.ok) return;
+      tabla.innerHTML = "";
+      r.invitados.forEach(i => {
+        tabla.innerHTML += `<tr>
+          <td>${i.familia}</td>
+          <td>${i.displayname}</td>
+          <td>${i.pases}</td>
+          <td>${i.pasesuti || 0}</td>
+        </tr>`;
+      });
+    });
 }
 </script>
 </body>
