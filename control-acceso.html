@@ -1,80 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Control de Acceso</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Control de Acceso</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/html5-qrcode"></script>
 
-  <script src="https://unpkg.com/html5-qrcode"></script>
+<style>
+:root {
+  --vino: #5a0f18;
+  --vino-claro: #8b1e2d;
+  --dorado: #b0935a;
+  --fondo: #f4efe9;
+}
 
-  <style>
-   /* =========================
-   CONTROL DE ACCESO – BODA
-   ========================= */
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--fondo);
+}
 
 .access-body {
   min-height: 100vh;
-  background:
-    url("https://www.transparenttextures.com/patterns/paper-3.png"),
-    var(--fondo);
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  padding: 14px;
 }
 
 .access-card {
-  max-width: 420px;
   width: 100%;
-  background:
-    url("https://www.transparenttextures.com/patterns/paper-3.png"),
-    rgba(255,255,255,.95);
+  max-width: 420px;
+  background: #fff;
   border-radius: 22px;
-  padding: 30px 24px;
-  box-shadow: 0 25px 60px rgba(99,13,22,.25);
+  padding: 24px 20px;
+  box-shadow: 0 20px 50px rgba(90,15,24,.25);
   border: 1px solid rgba(176,147,90,.45);
-  text-align: center;
 }
 
+/* ===== HEADER ===== */
 .access-title {
-  font-size: 1.9rem;
+  text-align: center;
+  font-size: 1.7rem;
   color: var(--vino);
   letter-spacing: 2px;
 }
 
 .separator-gold {
+  text-align: center;
   color: var(--dorado);
-  margin: 12px 0 25px;
+  margin: 10px 0 20px;
 }
 
-/* TABS */
+/* ===== TABS ===== */
 .access-tabs {
   display: flex;
-  gap: 8px;
-  margin-bottom: 25px;
+  gap: 6px;
+  margin-bottom: 20px;
 }
 
 .tab {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   border-radius: 30px;
-  border: 1px solid rgba(176,147,90,.5);
-  background: transparent;
+  border: 1px solid rgba(176,147,90,.6);
+  background: #fff;
   color: var(--vino);
   font-size: .85rem;
   letter-spacing: 1px;
 }
 
 .tab.active {
-  background: linear-gradient(135deg, var(--vino), var(--vino-claro));
-  color: white;
+  background: linear-gradient(135deg,var(--vino),var(--vino-claro));
+  color: #fff;
   border: none;
 }
 
-/* SECCIONES */
+/* ===== SECTIONS ===== */
 .section {
   display: none;
-  animation: fadeUp .6s ease forwards;
 }
 
 .section.active {
@@ -82,65 +87,80 @@
 }
 
 .section-label {
-  font-size: .85rem;
+  font-size: .8rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 15px;
   color: var(--vino);
+  margin-bottom: 12px;
 }
 
-/* QR */
+/* ===== QR ===== */
 .qr-frame {
-  padding: 18px;
-  border-radius: 16px;
-  background: linear-gradient(135deg,#fff,#f7f1ea);
-  box-shadow: inset 0 0 0 2px rgba(176,147,90,.4);
+  padding: 12px;
+  border-radius: 14px;
+  border: 2px solid rgba(176,147,90,.6);
 }
 
-/* INPUTS */
+/* ===== INPUTS ===== */
 input {
   width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(176,147,90,.4);
-  margin-bottom: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(176,147,90,.6);
   font-size: 1rem;
+  margin-bottom: 12px;
 }
 
-/* BOTÓN */
+/* ===== BUTTON ===== */
 .btn-primary {
   width: 100%;
-  padding: 14px;
+  padding: 16px;
   border-radius: 40px;
   background: linear-gradient(135deg,var(--vino),var(--vino-claro));
   color: #fff;
   border: none;
+  font-size: 1rem;
   letter-spacing: 1px;
-  font-size: .9rem;
-  box-shadow: 0 10px 25px rgba(99,13,22,.4);
 }
 
-/* INFO */
+/* ===== INFO ===== */
 .info-box h3 {
   color: var(--vino);
-  margin-bottom: 15px;
+  margin-bottom: 12px;
+  text-align: center;
 }
 
 .passes-info {
   display: flex;
   justify-content: space-between;
-  font-size: .85rem;
-  margin-bottom: 15px;
+  font-size: .9rem;
+  margin-bottom: 14px;
 }
 
-/* MENSAJES */
+.disponibles-ok { color: #146c43; font-weight: bold; }
+.disponibles-cero { color: #b02a37; font-weight: bold; }
+
 .status {
-  margin-top: 12px;
-  font-weight: 600;
-  color: green;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #146c43;
 }
 
-/* TABLA */
+/* ===== RESULTADOS ===== */
+.result-item {
+  border: 1px solid rgba(176,147,90,.6);
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.result-item:hover {
+  background: rgba(176,147,90,.12);
+}
+
+/* ===== LISTA ===== */
 .access-table {
   width: 100%;
   font-size: .85rem;
@@ -150,140 +170,155 @@ input {
 .access-table th {
   color: var(--vino);
   border-bottom: 1px solid rgba(176,147,90,.4);
-  padding-bottom: 6px;
 }
 
 .access-table td {
   padding: 6px 0;
 }
-  </style>
+
+/* ===== MOBILE ===== */
+@media (max-width: 480px) {
+  .passes-info {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+</style>
 </head>
+
 <body class="access-body">
-
 <div class="access-card">
-  <h1 class="access-title">Control de Acceso</h1>
-  <div class="separator-gold">✦</div>
 
-  <!-- TABS -->
-  <div class="access-tabs">
-    <button class="tab active" onclick="mostrar('qr')">Escanear QR</button>
-    <button class="tab" onclick="mostrar('manual')">Manual</button>
-    <button class="tab" onclick="mostrar('lista')">Lista</button>
-  </div>
+<h1 class="access-title">Control de Acceso</h1>
+<div class="separator-gold">✦</div>
 
-  <!-- QR -->
-  <div id="qr" class="section active">
-    <p class="section-label">Presenta el código de invitación</p>
-    <div class="qr-frame">
-      <div id="reader"></div>
-    </div>
-  </div>
-
-  <!-- MANUAL -->
-  <div id="manual" class="section">
-    <p class="section-label">Buscar familia</p>
-    <input type="text" id="familiaManual" placeholder="Apellido familiar">
-    <button class="btn-primary" onclick="buscarFamilia()">Buscar</button>
-  </div>
-
-  <!-- INFO -->
-  <div id="infoBox" class="section info-box">
-    <h3 id="nombre"></h3>
-
-    <div class="passes-info">
-      <span>Pases: <strong id="pases"></strong></span>
-      <span>Usados: <strong id="usados"></strong></span>
-      <span>Disponibles: <strong id="disponibles"></strong></span>
-    </div>
-
-    <input type="number" id="pasesUsar" placeholder="Pases a utilizar">
-    <button class="btn-primary" onclick="registrarEntrada()">Registrar entrada</button>
-
-    <p id="mensaje" class="status"></p>
-  </div>
-
-  <!-- LISTA -->
-  <div id="lista" class="section">
-    <table class="access-table">
-      <thead>
-        <tr>
-          <th>Familia</th>
-          <th>Nombre</th>
-          <th>Pases</th>
-          <th>Usados</th>
-        </tr>
-      </thead>
-      <tbody id="tabla"></tbody>
-    </table>
-  </div>
+<div class="access-tabs">
+  <button class="tab active" onclick="mostrar('qr',this)">QR</button>
+  <button class="tab" onclick="mostrar('manual',this)">Manual</button>
+  <button class="tab" onclick="mostrar('lista',this)">Lista</button>
 </div>
+
+<!-- QR -->
+<div id="qr" class="section active">
+  <p class="section-label">Escanear invitación</p>
+  <div class="qr-frame"><div id="reader"></div></div>
+</div>
+
+<!-- MANUAL -->
+<div id="manual" class="section">
+  <p class="section-label">Buscar invitado</p>
+  <input id="familiaManual" placeholder="Nombre o familia">
+  <button class="btn-primary" onclick="buscar()">Buscar</button>
+</div>
+
+<!-- RESULTADOS -->
+<div id="resultados" class="section">
+  <p class="section-label">Selecciona invitado</p>
+  <div id="listaResultados"></div>
+</div>
+
+<!-- INFO -->
+<div id="infoBox" class="section info-box">
+  <h3 id="nombre"></h3>
+
+  <div class="passes-info">
+    <span>Pases: <strong id="pases"></strong></span>
+    <span>Usados: <strong id="usados"></strong></span>
+    <span>Disponibles: <strong id="disponibles"></strong></span>
+  </div>
+
+  <input type="number" id="pasesUsar" placeholder="Pases a utilizar">
+  <button class="btn-primary" onclick="registrar()">Registrar entrada</button>
+  <p id="mensaje" class="status"></p>
+</div>
+
+<!-- LISTA -->
+<div id="lista" class="section">
+  <table class="access-table">
+    <thead>
+      <tr><th>Familia</th><th>Nombre</th><th>Pases</th><th>Usados</th></tr>
+    </thead>
+    <tbody id="tabla"></tbody>
+  </table>
+</div>
+
+</div>
+
 <script>
 let invitadoActual = null;
 let qrScanner = null;
 
-/* ---------- NAVEGACIÓN ---------- */
-function mostrar(id) {
+/* ===== NAV ===== */
+function mostrar(id, btn) {
   document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-  document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("active"));
-
+  document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
   document.getElementById(id).classList.add("active");
-  event.target.classList.add("active");
-
-  if (id === "qr") iniciarQR();
-  if (id === "lista") cargarLista();
+  if (btn) btn.classList.add("active");
 }
 
-/* ---------- QR ---------- */
+/* ===== QR ===== */
 function iniciarQR() {
   if (qrScanner) return;
-
   qrScanner = new Html5Qrcode("reader");
-  qrScanner.start(
-    { facingMode: "environment" },
-    { fps: 10, qrbox: 250 },
-    txt => {
-      try {
-        const data = JSON.parse(txt);
-        cargarInvitado(data.familia);
-        qrScanner.stop();
-      } catch {
-        alert("QR inválido");
-      }
-    }
-  );
+  qrScanner.start({ facingMode: "environment" }, { fps: 10, qrbox: 250 }, txt => {
+    try {
+      const d = JSON.parse(txt);
+      buscarInvitado(d.familia);
+      qrScanner.stop();
+    } catch { alert("QR inválido"); }
+  });
 }
 
-/* ---------- MANUAL ---------- */
-function buscarFamilia() {
-  const fam = document.getElementById("familiaManual").value.trim();
-  if (fam) cargarInvitado(fam);
+/* ===== BUSCAR ===== */
+function buscar() {
+  const v = familiaManual.value.trim();
+  if (v) buscarInvitado(v);
 }
 
-/* ---------- CARGAR INVITADO ---------- */
-function cargarInvitado(familia) {
-  fetch(`/.netlify/functions/obtener-invitado-nombre?displayname=${encodeURIComponent(familia)}`)
+function buscarInvitado(nombre) {
+  fetch(`/.netlify/functions/obtener-invitado-nombre?displayname=${encodeURIComponent(nombre)}`)
     .then(r => r.json())
     .then(r => {
       if (!r.ok) return alert("No encontrado");
 
-      invitadoActual = r.invitado;
+      if (r.invitados.length === 1) {
+        seleccionar(r.invitados[0]);
+        return;
+      }
 
-      document.getElementById("infoBox").classList.add("active");
-      document.getElementById("nombre").textContent = invitadoActual.displayname;
-      document.getElementById("pases").textContent = invitadoActual.pases;
-      document.getElementById("usados").textContent = invitadoActual.pasesuti || 0;
-      document.getElementById("disponibles").textContent =
-        invitadoActual.pases - (invitadoActual.pasesuti || 0);
+      mostrar("resultados");
+      listaResultados.innerHTML = "";
+      r.invitados.forEach(i => {
+        listaResultados.innerHTML += `
+          <div class="result-item" onclick='seleccionar(${JSON.stringify(i)})'>
+            <strong>${i.displayname}</strong><br>
+            Familia: ${i.familia}<br>
+            Disponibles:
+            <span class="${i.disponibles > 0 ? "disponibles-ok" : "disponibles-cero"}">
+              ${i.disponibles}
+            </span>
+          </div>`;
+      });
     });
 }
 
-/* ---------- REGISTRAR ---------- */
-function registrarEntrada() {
-  const usar = parseInt(document.getElementById("pasesUsar").value);
-  const disp = invitadoActual.pases - (invitadoActual.pasesuti || 0);
+/* ===== SELECT ===== */
+function seleccionar(i) {
+  invitadoActual = i;
+  mostrar("infoBox");
 
+  nombre.textContent = i.displayname;
+  pases.textContent = i.pases;
+  usados.textContent = i.usados;
+  disponibles.textContent = i.disponibles;
+  disponibles.className = i.disponibles > 0 ? "disponibles-ok" : "disponibles-cero";
+}
+
+/* ===== REGISTRAR ===== */
+function registrar() {
+  const usar = parseInt(pasesUsar.value);
   if (!usar || usar <= 0) return alert("Cantidad inválida");
-  if (usar > disp) return alert("Excede pases");
+  if (usar > invitadoActual.disponibles) return alert("Excede pases");
 
   fetch("/.netlify/functions/registrar-acceso", {
     method: "POST",
@@ -292,32 +327,27 @@ function registrarEntrada() {
   })
   .then(r => r.json())
   .then(r => {
-    if (r.ok) {
-      document.getElementById("mensaje").textContent = "✔ Acceso registrado";
-    }
+    if (r.ok) mensaje.textContent = "✔ Acceso registrado";
   });
 }
 
-/* ---------- LISTA ---------- */
+/* ===== LISTA ===== */
 function cargarLista() {
   fetch("/.netlify/functions/listar-invitados")
     .then(r => r.json())
     .then(r => {
       if (!r.ok) return;
-      const t = document.getElementById("tabla");
-      t.innerHTML = "";
+      tabla.innerHTML = "";
       r.invitados.forEach(i => {
-        t.innerHTML += `
-          <tr>
-            <td>${i.familia}</td>
-            <td>${i.displayname}</td>
-            <td>${i.pases}</td>
-            <td>${i.pasesuti || 0}</td>
-          </tr>`;
+        tabla.innerHTML += `<tr>
+          <td>${i.familia}</td>
+          <td>${i.displayname}</td>
+          <td>${i.pases}</td>
+          <td>${i.pasesuti || 0}</td>
+        </tr>`;
       });
     });
 }
 </script>
-
-
+</body>
 </html>
