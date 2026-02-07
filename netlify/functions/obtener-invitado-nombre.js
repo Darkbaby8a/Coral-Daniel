@@ -27,7 +27,8 @@ export const handler = async (event) => {
         pases,
         acepto,
         displayname,
-        pasesuti AS pasesyausados
+        COALESCE(pasesuti, 0)      AS pasesusados,
+        pases - COALESCE(pasesuti, 0) AS disponibles
       FROM public.invitados
       WHERE displayname ILIKE $1
       ORDER BY displayname
@@ -49,16 +50,17 @@ export const handler = async (event) => {
         ok: true,
         invitados: result.rows.map(r => ({
           familia: r.familia,
-          pases: r.pases,
-          acepto: r.acepto,
           displayname: r.displayname,
-          pasesuti: r.pasesyausados || 0,
+          pases: r.pases,
+          usados: r.pasesusados,
+          disponibles: r.disponibles,
+          acepto: r.acepto,
         })),
       }),
     };
 
   } catch (error) {
-    console.error("ERROR buscar por displayname:", error);
+    console.error("ERROR obtener invitado por nombre:", error);
 
     return {
       statusCode: 500,
