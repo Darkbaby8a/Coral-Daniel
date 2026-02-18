@@ -10,12 +10,12 @@ export const handler = async (event) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  const { codigo } = event.queryStringParameters || {};
+  const { familia } = event.queryStringParameters || {};
 
-  if (!codigo) {
+  if (!familia) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ ok: false, error: "Código requerido" })
+      body: JSON.stringify({ ok: false, error: "familia requerido" })
     };
   }
 
@@ -30,9 +30,9 @@ export const handler = async (event) => {
         acepto,
         fechaacepto
       FROM invitados
-      WHERE qr_code = $1
+      WHERE familia = $1
       LIMIT 1
-    `, [codigo]);
+    `, [familia]);
 
     if (rows.length === 0) {
       return {
