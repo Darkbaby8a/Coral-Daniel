@@ -329,7 +329,7 @@ function iniciarQR() {
 
         // 🔥 BUSCAR POR FAMILIA
         buscarPorFamilia(data.familia);
-
+        
         qrScanner.stop();
         qrScanner = null;
 
@@ -340,7 +340,7 @@ function iniciarQR() {
   );
 }
 function buscarPorFamilia(familia) {
-
+alert(familia);
   fetch(`/.netlify/functions/obtener-invitado-qr?familia=${encodeURIComponent(familia)}`)
     .then(r => r.json())
     .then(r => {
