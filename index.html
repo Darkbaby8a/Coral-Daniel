@@ -10,6 +10,127 @@
       <link rel="manifest" href="/site.webmanifest">
       <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <style>
+/* =========================== MODAL RSVP =========================== */
+
+.rsvp-modal {
+	position: fixed;
+	inset: 0;
+	background: rgba(45, 10, 15, 0.85);
+	backdrop-filter: blur(6px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10000;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.4s ease;
+}
+
+.rsvp-modal.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.rsvp-modal-content {
+	max-width: 480px;
+	width: 90%;
+	padding: 50px 40px;
+	text-align: center;
+	border-radius: 18px;
+	background: url("https://www.transparenttextures.com/patterns/paper-3.png"), #fff;
+	box-shadow: 0 25px 60px rgba(0,0,0,.35);
+	border: 1px solid rgba(176,147,90,.4);
+	transform: translateY(30px);
+	transition: transform 0.5s ease;
+}
+
+.rsvp-modal.active .rsvp-modal-content {
+	transform: translateY(0);
+}
+
+/* Subtítulo */
+.modal-subtitle {
+	letter-spacing: 4px;
+	font-size: 0.75rem;
+	color: var(--dorado);
+	display: block;
+	margin-bottom: 10px;
+}
+
+/* Texto */
+.modal-text {
+	margin: 20px auto 35px;
+	font-size: 1rem;
+	line-height: 1.7;
+	color: #555;
+	max-width: 380px;
+}
+
+/* Botones */
+.modal-buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.btn-modal {
+	padding: 14px;
+	border-radius: 40px;
+	border: none;
+	font-family: 'AvenirNext', sans-serif;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-size: 0.9rem;
+}
+
+/* Botón SI */
+.btn-modal.yes {
+	background: linear-gradient(135deg, var(--vino), var(--vino-claro));
+	color: #fff;
+	box-shadow: 0 10px 25px rgba(99,13,22,.35);
+}
+
+.btn-modal.yes:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 14px 35px rgba(99,13,22,.45);
+}
+
+/* Botón NO */
+.btn-modal.no {
+	background: transparent;
+	border: 1px solid var(--vino);
+	color: var(--vino);
+}
+
+.btn-modal.no:hover {
+	background: var(--vino);
+	color: #fff;
+}
+
+/* Cancelar */
+.modal-close {
+	margin-top: 25px;
+	background: none;
+	border: none;
+	font-size: 0.85rem;
+	letter-spacing: 2px;
+	color: #888;
+	cursor: pointer;
+	transition: color .3s ease;
+}
+
+.modal-close:hover {
+	color: var(--vino);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+	.rsvp-modal-content {
+		padding: 35px 25px;
+	}
+}
 
 /* =========================== FUENTES =========================== */
 @font-face {
@@ -1536,6 +1657,35 @@ a {
          </div>
          <button class="btn-rsvp" id="btnAceptar"> Confirmar asistencia </button> 
       </section>
+	   <!-- ================= MODAL RSVP ELEGANTE ================= -->
+<div id="confirmModal" class="rsvp-modal">
+  <div class="rsvp-modal-content paper">
+
+    <small class="modal-subtitle">CONFIRMACIÓN</small>
+    <h2>¿Nos acompañarán?</h2>
+
+    <p class="modal-text">
+      Su presencia es muy importante para nosotros.
+      Por favor confirme su asistencia.
+    </p>
+
+    <div class="modal-buttons">
+      <button id="btnSi" class="btn-modal yes">
+        Confirmar Asistencia
+      </button>
+
+      <button id="btnNo" class="btn-modal no">
+        No podremos asistir
+      </button>
+    </div>
+
+    <button id="btnCerrar" class="modal-close">
+      Cancelar
+    </button>
+
+  </div>
+</div>
+
       <footer style="padding: 40px; text-align: center; font-size: 0.8rem; color: #888;"> Coral & Daniel | 2026 </footer>
       <script>
 /* =========================== CONTADOR =========================== */
@@ -1683,7 +1833,7 @@ if (!familia) {
       }
 
       btnAceptar.addEventListener("click", () =>
-        aceptarInvitacion(familia)
+       abrirModal(familia);
       );
     })
     .catch(() => {
@@ -1696,18 +1846,26 @@ if (!familia) {
 
 /* =========================== ACEPTAR INVITACIÓN =========================== */
 
-function aceptarInvitacion(familia) {
+function aceptarInvitacion(familia, asistira) {
   fetch("/.netlify/functions/aceptarInvitacion", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ familia }),
+    body: JSON.stringify({ 
+      familia,
+      asistira
+    }),
   })
     .then((res) => res.json())
     .then((res) => {
       if (res.ok) {
-        crearEventoCalendario();
-        mostrarGracias();
-        generarQR(familia);
+
+        if (asistira) {
+          crearEventoCalendario();
+          generarQR(familia);
+        }
+
+        mostrarGracias(asistira);
+
       } else {
         alert(res.message || "No se pudo confirmar la invitación");
       }
@@ -1715,14 +1873,24 @@ function aceptarInvitacion(familia) {
     .catch(() => alert("Error de conexión"));
 }
 
-function mostrarGracias() {
-  attendanceText.innerHTML = `
-    💖 Gracias por aceptar nuestra invitación.<br>
-    Por favor recuerda la fecha.<br>
-    Será un honor contar con ustedes.
-  `;
+
+function mostrarGracias(asistira) {
+
+  if (asistira) {
+    attendanceText.innerHTML = `
+      💖 Gracias por confirmar tu asistencia.<br>
+      Será un honor contar con ustedes.
+    `;
+  } else {
+    attendanceText.innerHTML = `
+      💌 Gracias por avisarnos.<br>
+      Lamentaremos no contar con ustedes, pero entendemos.
+    `;
+  }
+
   btnAceptar.style.display = "none";
 }
+
 
 
 /* =========================== CALENDARIO (.ICS) =========================== */
@@ -1800,6 +1968,29 @@ const sectionObserver = new IntersectionObserver(
 if (weddingSection) {
   sectionObserver.observe(weddingSection);
 }
+		  const modal = document.getElementById("confirmModal");
+const btnSi = document.getElementById("btnSi");
+const btnNo = document.getElementById("btnNo");
+const btnCerrar = document.getElementById("btnCerrar");
+function abrirModal(familia) {
+  familiaActual = familia;
+  modal.style.display = "flex";
+}
+
+btnCerrar.addEventListener("click", () => {
+  modal.classList.remove("active");
+});
+
+btnSi.addEventListener("click", () => {
+  modal.classList.remove("active");
+  aceptarInvitacion(familiaActual, true);
+});
+
+btnNo.addEventListener("click", () => {
+  modal.classList.remove("active");
+  aceptarInvitacion(familiaActual, false);
+});
+
 
 				</script> 
    </body>
