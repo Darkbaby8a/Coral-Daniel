@@ -237,14 +237,43 @@ input {
 </div>
 
 <!-- LISTA -->
+<!-- LISTA -->
 <div id="lista" class="section">
+
+  <p class="section-label">Filtros</p>
+
+  <input type="text" id="filtroNombre" placeholder="Buscar por nombre o familia">
+
+  <select id="filtroEstado">
+    <option value="todos">Todos</option>
+    <option value="aceptado">Aceptaron</option>
+    <option value="rechazado">Rechazaron</option>
+    <option value="pendiente">Pendientes</option>
+  </select>
+
+  <select id="filtroDisponibles">
+    <option value="todos">Todos</option>
+    <option value="con">Con pases disponibles</option>
+    <option value="sin">Sin pases disponibles</option>
+  </select>
+
+  <br><br>
+
   <table class="access-table">
     <thead>
-      <tr><th>Familia</th><th>Nombre</th><th>Pases</th><th>Usados</th></tr>
+      <tr>
+        <th>Familia</th>
+        <th>Nombre</th>
+        <th>Pases</th>
+        <th>Usados</th>
+        <th>Disponibles</th>
+        <th>Estado</th>
+      </tr>
     </thead>
     <tbody id="tabla"></tbody>
   </table>
 </div>
+
 
 </div>
 <script>
@@ -372,27 +401,79 @@ function registrar() {
 }
 
 /* ===== LISTA ===== */
+let listaGlobal = [];
+
 function cargarLista() {
   fetch("/.netlify/functions/listar-invitados")
     .then(r => r.json())
     .then(r => {
       if (!r.ok) return;
 
-      const tabla = document.getElementById("tabla");
-      tabla.innerHTML = "";
-
-      r.invitados.forEach(i => {
-        tabla.innerHTML += `
-          <tr>
-            <td>${i.familia}</td>
-            <td>${i.displayname}</td>
-            <td>${i.pases}</td>
-            <td>${i.pasesuti || 0}</td>
-          </tr>
-        `;
-      });
+      listaGlobal = r.invitados;
+      renderTabla(listaGlobal);
     });
 }
+
+function renderTabla(data) {
+  const tabla = document.getElementById("tabla");
+  tabla.innerHTML = "";
+
+  data.forEach(i => {
+
+    const disponibles = i.pases - (i.pasesuti || 0);
+
+    let estado = "Pendiente";
+    if (i.acepto === true) estado = "Aceptó";
+    if (i.acepto === false) estado = "Rechazó";
+
+    tabla.innerHTML += `
+      <tr>
+        <td>${i.familia}</td>
+        <td>${i.displayname}</td>
+        <td>${i.pases}</td>
+        <td>${i.pasesuti || 0}</td>
+        <td>${disponibles}</td>
+        <td>${estado}</td>
+      </tr>
+    `;
+  });
+}
+document.getElementById("filtroNombre").addEventListener("input", aplicarFiltros);
+document.getElementById("filtroEstado").addEventListener("change", aplicarFiltros);
+document.getElementById("filtroDisponibles").addEventListener("change", aplicarFiltros);
+
+function aplicarFiltros() {
+
+  const nombreFiltro = document.getElementById("filtroNombre").value.toLowerCase();
+  const estadoFiltro = document.getElementById("filtroEstado").value;
+  const dispFiltro = document.getElementById("filtroDisponibles").value;
+
+  let filtrados = listaGlobal.filter(i => {
+
+    const disponibles = i.pases - (i.pasesuti || 0);
+
+    // filtro nombre
+    const coincideNombre =
+      i.displayname.toLowerCase().includes(nombreFiltro) ||
+      i.familia.toLowerCase().includes(nombreFiltro);
+
+    // filtro estado
+    let coincideEstado = true;
+    if (estadoFiltro === "aceptado") coincideEstado = i.acepto === true;
+    if (estadoFiltro === "rechazado") coincideEstado = i.acepto === false;
+    if (estadoFiltro === "pendiente") coincideEstado = i.acepto === null;
+
+    // filtro disponibles
+    let coincideDisp = true;
+    if (dispFiltro === "con") coincideDisp = disponibles > 0;
+    if (dispFiltro === "sin") coincideDisp = disponibles <= 0;
+
+    return coincideNombre && coincideEstado && coincideDisp;
+  });
+
+  renderTabla(filtrados);
+}
+
 </script>
 </body>
 </html>
