@@ -418,12 +418,37 @@ function seleccionar(i) {
   invitadoActual = i;
   mostrar("infoBox");
 
+  const usados = i.pasesuti || 0;
+  const disponibles = (i.pases || 0) - usados;
+
   document.getElementById("nombre").textContent = i.displayname;
   document.getElementById("pases").textContent = i.pases;
-  document.getElementById("usados").textContent = i.pasesuti || 0;
+  document.getElementById("usados").textContent = usados;
+
+  const dispEl = document.getElementById("disponibles");
+  dispEl.textContent = disponibles;
+
+  // Colores visuales
+  if (disponibles > 0) {
+    dispEl.className = "disponibles-ok";
+  } else {
+    dispEl.className = "disponibles-cero";
+  }
 
   document.getElementById("mensaje").style.display = "none";
+
+  // 🔒 BLOQUEO VISUAL DEL BOTÓN
+  const btn = document.querySelector("#infoBox .btn-primary");
+
+  if (i.acepto === true && i.rechazo === false && disponibles > 0) {
+    btn.disabled = false;
+    btn.style.opacity = "1";
+  } else {
+    btn.disabled = true;
+    btn.style.opacity = "0.5";
+  }
 }
+
 
 /* =============================
    REGISTRAR ENTRADA
@@ -431,8 +456,31 @@ function seleccionar(i) {
 function registrar() {
   if (!invitadoActual) return;
 
+  const usados = invitadoActual.pasesuti || 0;
+  const disponibles = (invitadoActual.pases || 0) - usados;
+
+  // 🔒 Validar estado
+  if (!(invitadoActual.acepto === true && invitadoActual.rechazo === false)) {
+    alert("Este invitado no aceptó la invitación.");
+    return;
+  }
+
+  if (disponibles <= 0) {
+    alert("No hay pases disponibles.");
+    return;
+  }
+
   const usar = parseInt(document.getElementById("pasesUsar").value);
-  if (!usar || usar <= 0) return alert("Cantidad inválida");
+
+  if (!usar || usar <= 0) {
+    alert("Cantidad inválida");
+    return;
+  }
+
+  if (usar > disponibles) {
+    alert("Excede los pases disponibles");
+    return;
+  }
 
   fetch("/.netlify/functions/registrar-acceso", {
     method: "POST",
@@ -444,15 +492,19 @@ function registrar() {
   })
   .then(r => r.json())
   .then(r => {
+
     if (r.ok) {
+
       document.getElementById("mensaje").style.display = "block";
       document.getElementById("pasesUsar").value = "";
 
-      invitadoActual.pasesuti = (invitadoActual.pasesuti || 0) + usar;
+      invitadoActual.pasesuti = usados + usar;
+
       seleccionar(invitadoActual);
     }
   });
 }
+
 
 /* =============================
    LISTA
