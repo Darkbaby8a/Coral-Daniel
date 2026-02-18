@@ -359,7 +359,7 @@ function iniciarQR() {
   );
 }
 function buscarPorFamilia(familia) {
-alert(familia);
+
   fetch(`/.netlify/functions/obtener-invitado-qr?familia=${encodeURIComponent(familia)}`)
     .then(r => r.json())
     .then(r => {
