@@ -6,6 +6,7 @@ const pool = new Pool({
 });
 
 export const handler = async (event) => {
+
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
@@ -14,64 +15,61 @@ export const handler = async (event) => {
   }
 
   try {
-    // 1️⃣ Leer datos enviados desde el frontend
-    const { familia } = JSON.parse(event.body);
+    const { familia, asistira } = JSON.parse(event.body);
 
-    if (!familia) {
+    if (!familia || typeof asistira !== "boolean") {
       return {
         statusCode: 400,
-        body: JSON.stringify({ ok: false, message: "Familia requerida" }),
+        body: JSON.stringify({
+          ok: false,
+          message: "Datos incompletos",
+        }),
       };
     }
 
-    // 2️⃣ UPDATE en Neon
+    // Determinar valores dinámicamente
+    const acepto = asistira === true;
+    const rechazo = asistira === false;
+
     const result = await pool.query(
       `
       UPDATE public.invitados
-      SET acepto = true,
-          confirmado_en = NOW()
-      WHERE familia = $1
-        AND acepto = false
+      SET 
+        acepto = $1,
+        rechazo = $2,
+        confirmado_en = NOW()
+      WHERE familia = $3
       RETURNING id;
       `,
-      [familia]
+      [acepto, rechazo, familia]
     );
 
-    // 3️⃣ Si no se actualizó nada
     if (result.rowCount === 0) {
       return {
         statusCode: 200,
         body: JSON.stringify({
           ok: false,
-          message: "Invitación no encontrada o ya confirmada",
+          message: "Invitación no encontrada",
         }),
       };
     }
 
-    // 4️⃣ Todo bien
-    console.log("Invitación confirmada:", familia);
-
     return {
       statusCode: 200,
-      body: JSON.stringify({ ok: true }),
+      body: JSON.stringify({
+        ok: true,
+        asistira,
+      }),
     };
 
   } catch (error) {
-    // 🔍 Logs útiles para Netlify
     console.error("ERROR Neon:", error.message);
-
-    const check = await pool.query(
-      "SELECT current_database(), current_schema(), to_regclass('public.invitados')"
-    );
-
-    console.log("CHECK:", check.rows);
 
     return {
       statusCode: 500,
       body: JSON.stringify({
         ok: false,
         error: error.message,
-        check: check.rows,
       }),
     };
   }
