@@ -6,6 +6,7 @@ const pool = new Pool({
 });
 
 export const handler = async (event) => {
+
   if (event.httpMethod !== "GET") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
@@ -20,42 +21,31 @@ export const handler = async (event) => {
   }
 
   try {
+
     const { rows } = await pool.query(`
       SELECT
         id,
         familia,
         displayname,
         pases,
-        pasesuti,
+        COALESCE(pasesuti,0) as pasesuti,
         acepto,
         fechaacepto
       FROM invitados
       WHERE familia = $1
-      LIMIT 1
+      ORDER BY displayname
     `, [familia]);
-
-    if (rows.length === 0) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ ok: false })
-      };
-    }
-
-    const i = rows[0];
 
     return {
       statusCode: 200,
       body: JSON.stringify({
         ok: true,
-        invitado: {
-          ...i,
-          pasesuti: i.pasesuti ?? 0,
-          disponibles: (i.pases ?? 0) - (i.pasesuti ?? 0)
-        }
+        invitados: rows
       })
     };
 
   } catch (err) {
+
     return {
       statusCode: 500,
       body: JSON.stringify({ ok: false, error: err.message })
