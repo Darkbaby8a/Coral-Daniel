@@ -314,21 +314,65 @@ function iniciarQR() {
   if (qrScanner) return;
 
   qrScanner = new Html5Qrcode("reader");
+
   qrScanner.start(
     { facingMode: "environment" },
     { fps: 10, qrbox: 250 },
-    txt => {
+    (txt) => {
       try {
         const data = JSON.parse(txt);
-        buscarInvitado(data.familia);
+
+        if (!data.familia) {
+          alert("QR inválido: no contiene familia");
+          return;
+        }
+
+        // 🔥 BUSCAR POR FAMILIA
+        buscarPorFamilia(data.familia);
+
         qrScanner.stop();
         qrScanner = null;
-      } catch {
+
+      } catch (err) {
         alert("QR inválido");
       }
     }
   );
 }
+function buscarPorFamilia(familia) {
+
+  fetch(`/.netlify/functions/obtener-invitado-qr?familia=${encodeURIComponent(familia)}`)
+    .then(r => r.json())
+    .then(r => {
+
+      if (!r.ok || r.invitados.length === 0) {
+        alert("Familia no encontrada");
+        return;
+      }
+
+      if (r.invitados.length === 1) {
+        seleccionar(r.invitados[0]);
+        return;
+      }
+
+      // Si hay varios miembros de la familia
+      mostrar("resultados");
+
+      const cont = document.getElementById("listaResultados");
+      cont.innerHTML = "";
+
+      r.invitados.forEach(i => {
+        cont.innerHTML += `
+          <div class="result-item" onclick='seleccionar(${JSON.stringify(i)})'>
+            <strong>${i.displayname}</strong><br>
+            Familia: ${i.familia}
+          </div>
+        `;
+      });
+
+    });
+}
+
 
 /* =============================
    BUSCAR
