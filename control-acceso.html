@@ -261,15 +261,17 @@ input {
 
   <table class="access-table">
     <thead>
-      <tr>
-        <th>Familia</th>
-        <th>Nombre</th>
-        <th>Pases</th>
-        <th>Usados</th>
-        <th>Disponibles</th>
-        <th>Estado</th>
-      </tr>
-    </thead>
+  <tr>
+    <th>Familia</th>
+    <th>Nombre</th>
+    <th>Pases</th>
+    <th>Usados</th>
+    <th>Disponibles</th>
+    <th>Aceptó</th>
+    <th>Rechazó</th>
+  </tr>
+</thead>
+
     <tbody id="tabla"></tbody>
   </table>
 </div>
@@ -420,24 +422,27 @@ function renderTabla(data) {
 
   data.forEach(i => {
 
-    const disponibles = i.pases - (i.pasesuti || 0);
-
-    let estado = "Pendiente";
-    if (i.acepto === true) estado = "Aceptó";
-    if (i.acepto === false) estado = "Rechazó";
+    const acepto = i.acepto === true ? "✔" : "";
+    const rechazo = i.acepto === false ? "✖" : "";
 
     tabla.innerHTML += `
       <tr>
         <td>${i.familia}</td>
         <td>${i.displayname}</td>
         <td>${i.pases}</td>
-        <td>${i.pasesuti || 0}</td>
-        <td>${disponibles}</td>
-        <td>${estado}</td>
+        <td>${i.pasesuti}</td>
+        <td>${i.disponibles}</td>
+        <td style="text-align:center;color:green;font-weight:bold;">
+          ${acepto}
+        </td>
+        <td style="text-align:center;color:#b02a37;font-weight:bold;">
+          ${rechazo}
+        </td>
       </tr>
     `;
   });
 }
+
 document.getElementById("filtroNombre").addEventListener("input", aplicarFiltros);
 document.getElementById("filtroEstado").addEventListener("change", aplicarFiltros);
 document.getElementById("filtroDisponibles").addEventListener("change", aplicarFiltros);
