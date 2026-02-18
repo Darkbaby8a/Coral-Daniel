@@ -56,6 +56,7 @@ export const handler = async (event) => {
           usados: r.pasesusados,
           disponibles: r.disponibles,
           acepto: r.acepto,
+          rechazo: r.rechazo,
         })),
       }),
     };
