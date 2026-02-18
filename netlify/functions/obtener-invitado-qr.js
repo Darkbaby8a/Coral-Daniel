@@ -30,6 +30,7 @@ export const handler = async (event) => {
         pases,
         COALESCE(pasesuti,0) as pasesuti,
         acepto,
+        rechazo,
         confirmado_en
       FROM invitados
       WHERE familia = $1
