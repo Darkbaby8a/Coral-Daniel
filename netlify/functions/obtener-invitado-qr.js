@@ -30,7 +30,7 @@ export const handler = async (event) => {
         pases,
         COALESCE(pasesuti,0) as pasesuti,
         acepto,
-        fechaacepto
+        confirmado_en
       FROM invitados
       WHERE familia = $1
       ORDER BY displayname
