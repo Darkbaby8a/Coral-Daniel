@@ -1986,9 +1986,11 @@ if (weddingSection) {
 const btnSi = document.getElementById("btnSi");
 const btnNo = document.getElementById("btnNo");
 const btnCerrar = document.getElementById("btnCerrar");
+let familiaActual = null;
+
 function abrirModal(familia) {
   familiaActual = familia;
-  modal.style.display = "flex";
+  modal.classList.add("active");
 }
 
 btnCerrar.addEventListener("click", () => {
@@ -1996,8 +1998,26 @@ btnCerrar.addEventListener("click", () => {
 });
 
 btnSi.addEventListener("click", () => {
-  modal.classList.remove("active");
+
   aceptarInvitacion(familiaActual, true);
+
+  // Cambiamos contenido del modal
+  const content = document.querySelector(".rsvp-modal-content");
+
+  content.innerHTML = `
+    <small class="modal-subtitle">CONFIRMACIÓN EXITOSA</small>
+    <h2>¡Gracias por confirmar!</h2>
+    <p class="modal-text">
+      Por favor tome captura de su código QR.<br>
+      Será su pase de entrada el día del evento.
+    </p>
+  `;
+
+  // Cerrar después de 4 segundos
+  setTimeout(() => {
+    modal.classList.remove("active");
+  }, 4000);
+
 });
 
 btnNo.addEventListener("click", () => {
