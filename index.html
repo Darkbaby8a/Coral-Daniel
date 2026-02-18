@@ -1460,6 +1460,85 @@ html {
         font-size: 48px;
     }
 }
+/* =========================
+   MODAL RSVP
+========================= */
+.rsvp-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(45, 10, 15, 0.85);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+}
+
+.rsvp-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.rsvp-card {
+    background:
+        url("https://www.transparenttextures.com/patterns/paper-3.png"),
+        #fff;
+    padding: 40px;
+    border-radius: 14px;
+    text-align: center;
+    max-width: 380px;
+    width: 90%;
+    box-shadow: 0 20px 50px rgba(0,0,0,.4);
+    border-top: 4px solid var(--vino);
+}
+
+.rsvp-card h3 {
+    color: var(--vino);
+    margin-bottom: 10px;
+}
+
+.rsvp-card p {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.rsvp-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-confirm {
+    flex: 1;
+    padding: 14px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: .3s ease;
+}
+
+.btn-confirm.yes {
+    background: var(--vino);
+    color: #fff;
+}
+
+.btn-confirm.yes:hover {
+    background: var(--vino-claro);
+}
+
+.btn-confirm.no {
+    background: #ddd;
+    color: #333;
+}
+
+.btn-confirm.no:hover {
+    background: #bbb;
+}
 
     </style>
 </head>
@@ -1684,6 +1763,20 @@ url('https://www.transparenttextures.com/patterns/paper-3.png'),
     </button>
 </section>
 
+<!-- =========================
+     MODAL CONFIRMAR ASISTENCIA
+========================= -->
+<div class="rsvp-modal" id="rsvpModal">
+    <div class="rsvp-card">
+        <h3>¿Estás seguro de asistir?</h3>
+        <p>Nos encantará compartir este día contigo.</p>
+
+        <div class="rsvp-actions">
+            <button class="btn-confirm yes" id="confirmYes">Sí, asistiré</button>
+            <button class="btn-confirm no" id="confirmNo">No podré asistir</button>
+        </div>
+    </div>
+</div>
 
 
     <footer style="padding: 40px; text-align: center; font-size: 0.8rem; color: #888;">
@@ -1761,6 +1854,8 @@ observer.observe(section);
    =========================== */
 let petalInterval = null;
 
+let currentPetalColors = ['#630d16', '#ff7f50', '#f8ad9d', '#e5989b'];
+
 function createPetal() {
     const petal = document.createElement('div');
     petal.className = 'petal';
@@ -1770,8 +1865,9 @@ function createPetal() {
     petal.style.height = size + 'px';
     petal.style.left = Math.random() * 100 + 'vw';
 
-    const colors = ['#630d16', '#ff7f50', '#f8ad9d', '#e5989b'];
-    petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+    // 🎨 Usa colores dinámicos
+    petal.style.background =
+        currentPetalColors[Math.floor(Math.random() * currentPetalColors.length)];
 
     const duration = Math.random() * 4 + 6;
     petal.style.animationDuration = duration + 's';
@@ -1780,6 +1876,49 @@ function createPetal() {
 
     setTimeout(() => petal.remove(), duration * 1000);
 }
+/* ===========================
+   CAMBIO DE COLOR POR SECCIÓN
+   =========================== */
+
+const sections = document.querySelectorAll("section, header");
+
+const colorPalettes = {
+    hero: ['#630d16', '#8b1a26', '#b0935a'],
+    wedding: ['#b0935a', '#e6c78c', '#fff1d6'],
+    schedule: ['#630d16', '#c44536', '#ff7675'],
+    dress: ['#8b1a26', '#f8ad9d', '#e5989b'],
+    gifts: ['#D4AF37', '#f1c40f', '#b0935a'],
+    attendance: ['#630d16', '#ff7f50', '#e5989b']
+};
+
+const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+
+            if (entry.target.classList.contains("hero")) {
+                currentPetalColors = colorPalettes.hero;
+            }
+            else if (entry.target.classList.contains("wedding-section")) {
+                currentPetalColors = colorPalettes.wedding;
+            }
+            else if (entry.target.classList.contains("schedule-section")) {
+                currentPetalColors = colorPalettes.schedule;
+            }
+            else if (entry.target.classList.contains("dress-code")) {
+                currentPetalColors = colorPalettes.dress;
+            }
+            else if (entry.target.classList.contains("gifts-section")) {
+                currentPetalColors = colorPalettes.gifts;
+            }
+            else if (entry.target.classList.contains("attendance")) {
+                currentPetalColors = colorPalettes.attendance;
+            }
+        }
+    });
+}, { threshold: 0.4 });
+
+sections.forEach(section => sectionObserver.observe(section));
+
 
 function startPetals() {
     if (petalInterval) return;
@@ -1789,6 +1928,27 @@ function startPetals() {
 
     petalInterval = setInterval(createPetal, interval);
 }
+
+function stopPetals() {
+    if (petalInterval) {
+        clearInterval(petalInterval);
+        petalInterval = null;
+    }
+}
+
+// Iniciar pétalos cuando la página esté lista
+window.addEventListener("load", () => {
+    startPetals();
+});
+
+// Detener si la pestaña no está activa (optimización)
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        stopPetals();
+    } else {
+        startPetals();
+    }
+});
 
 /* ===========================
    INICIAR DESPUÉS DEL SOBRE
@@ -1811,6 +1971,9 @@ const familia = params.get("familia");
 const familyName = document.getElementById("familyName");
 const passesCount = document.getElementById("passesCount");
 const btnAceptar = document.getElementById("btnAceptar");
+const modal = document.getElementById("rsvpModal");
+const confirmYes = document.getElementById("confirmYes");
+const confirmNo = document.getElementById("confirmNo");
 const attendanceText = document.getElementById("attendanceText");
 const passesBox = document.getElementById("passesBox");
 
@@ -1841,17 +2004,46 @@ if (!familia) {
         btnAceptar.style.display = "inline-block";
       }
 
-      btnAceptar.addEventListener("click", () =>
-        aceptarInvitacion(familia)
-      );
-    })
-    .catch(() => {
-      attendanceText.textContent = "Error al cargar la invitación.";
-      btnAceptar.style.display = "none";
-      passesBox.style.display = "none";
-    });
-}
+     btnAceptar.addEventListener("click", () => {
+    modal.classList.add("active");
+});
 
+confirmYes.addEventListener("click", () => {
+    enviarRespuesta(true);
+});
+
+confirmNo.addEventListener("click", () => {
+    enviarRespuesta(false);
+});
+
+
+}
+async function enviarRespuesta(asiste) {
+
+    const familyName = document.getElementById("familyName").textContent;
+    const passes = document.getElementById("passesCount").textContent;
+
+    try {
+        const response = await fetch("/.netlify/functions/rsvp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                familia: familyName,
+                pases: passes,
+                asistira: asiste
+            })
+        });
+
+        const data = await response.json();
+
+        alert("¡Respuesta enviada correctamente!");
+        modal.classList.remove("active");
+
+    } catch (error) {
+        alert("Ocurrió un error. Inténtalo nuevamente.");
+        console.error(error);
+    }
+}
 
         function mostrarGracias() {
             attendanceText.innerHTML = `
