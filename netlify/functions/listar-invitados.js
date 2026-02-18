@@ -17,15 +17,8 @@ export const handler = async () => {
         (pases - COALESCE(pasesuti, 0)) AS disponibles,
         acepto,
         confirmado_en,
-        
-        CASE
-          WHEN acepto = true THEN 'acepto'
-          WHEN rechazo = true THEN 'rechazo'
-          ELSE 'pendiente'
-        END AS estado,
+        rechazo
 
-        CASE WHEN acepto = false THEN true ELSE false END AS rechazo,
-        CASE WHEN acepto IS NULL THEN true ELSE false END AS pendiente
 
       FROM invitados
       ORDER BY familia, displayname
