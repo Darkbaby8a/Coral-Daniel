@@ -1782,105 +1782,48 @@ url('https://www.transparenttextures.com/patterns/paper-3.png'),
     <footer style="padding: 40px; text-align: center; font-size: 0.8rem; color: #888;">
         Coral & Daniel | 2026
     </footer>    <script>
-        /* ===========================
-           COUNTDOWN
-           =========================== */
-        const weddingDate = new Date("April 26, 2026 15:00:00").getTime();
+/* ===========================
+   COUNTDOWN
+=========================== */
+const weddingDate = new Date("April 26, 2026 15:00:00").getTime();
 
-        function updateElement(id, newValue) {
-            const element = document.getElementById(id);
-            const formatted = String(newValue).padStart(2, '0');
+function updateElement(id, newValue) {
+    const element = document.getElementById(id);
+    const formatted = String(newValue).padStart(2, '0');
 
-            if (element.textContent !== formatted) {
-                element.textContent = formatted;
-                element.classList.remove('animate-down');
-                void element.offsetWidth;
-                element.classList.add('animate-down');
-            }
-        }
+    if (element && element.textContent !== formatted) {
+        element.textContent = formatted;
+        element.classList.remove('animate-down');
+        void element.offsetWidth;
+        element.classList.add('animate-down');
+    }
+}
 
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
+const timer = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
 
-            if (distance < 0) {
-                clearInterval(timer);
-                document.getElementById("timer").textContent = "¡Es hoy!";
-                return;
-            }
+    if (distance < 0) {
+        clearInterval(timer);
+        const timerBox = document.getElementById("timer");
+        if (timerBox) timerBox.textContent = "¡Es hoy!";
+        return;
+    }
 
-            updateElement("days", Math.floor(distance / (1000 * 60 * 60 * 24)));
-            updateElement("hours", Math.floor((distance / (1000 * 60 * 60)) % 24));
-            updateElement("minutes", Math.floor((distance / (1000 * 60)) % 60));
-            updateElement("seconds", Math.floor((distance / 1000) % 60));
-        }, 1000);
+    updateElement("days", Math.floor(distance / (1000 * 60 * 60 * 24)));
+    updateElement("hours", Math.floor((distance / (1000 * 60 * 60)) % 24));
+    updateElement("minutes", Math.floor((distance / (1000 * 60)) % 60));
+    updateElement("seconds", Math.floor((distance / 1000) % 60));
+}, 1000);
 
-        /* ===========================
-           INVITACIÓN / APERTURA
-           =========================== */
-        document.body.style.overflow = "hidden";
-
-        window.addEventListener("load", () => {
-            const envelope = document.getElementById("invitationCover");
-
-            // Pequeña pausa elegante
-            setTimeout(() => {
-                envelope.classList.add("open");
-            }, 1200);
-
-            // Desaparece suavemente
-            setTimeout(() => {
-                envelope.classList.add("hide");
-                document.body.style.overflow = "auto";
-            }, 3400);
-        });
-       /* ===========================
-   WEDDING SECTION OBSERVER
-   =========================== */
-const section = document.querySelector('.wedding-section');
-
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            section.classList.add('visible');
-        }
-    });
-}, { threshold: 0.3 });
-
-observer.observe(section);
 
 /* ===========================
-   PÉTALOS OPTIMIZADOS
-   =========================== */
+   PÉTALOS DINÁMICOS
+=========================== */
+
 let petalInterval = null;
 
 let currentPetalColors = ['#630d16', '#ff7f50', '#f8ad9d', '#e5989b'];
-
-function createPetal() {
-    const petal = document.createElement('div');
-    petal.className = 'petal';
-
-    const size = Math.random() * 10 + 8;
-    petal.style.width = size + 'px';
-    petal.style.height = size + 'px';
-    petal.style.left = Math.random() * 100 + 'vw';
-
-    // 🎨 Usa colores dinámicos
-    petal.style.background =
-        currentPetalColors[Math.floor(Math.random() * currentPetalColors.length)];
-
-    const duration = Math.random() * 4 + 6;
-    petal.style.animationDuration = duration + 's';
-
-    document.body.appendChild(petal);
-
-    setTimeout(() => petal.remove(), duration * 1000);
-}
-/* ===========================
-   CAMBIO DE COLOR POR SECCIÓN
-   =========================== */
-
-const sections = document.querySelectorAll("section, header");
 
 const colorPalettes = {
     hero: ['#630d16', '#8b1a26', '#b0935a'],
@@ -1891,41 +1834,29 @@ const colorPalettes = {
     attendance: ['#630d16', '#ff7f50', '#e5989b']
 };
 
-const sectionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+function createPetal() {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
 
-            if (entry.target.classList.contains("hero")) {
-                currentPetalColors = colorPalettes.hero;
-            }
-            else if (entry.target.classList.contains("wedding-section")) {
-                currentPetalColors = colorPalettes.wedding;
-            }
-            else if (entry.target.classList.contains("schedule-section")) {
-                currentPetalColors = colorPalettes.schedule;
-            }
-            else if (entry.target.classList.contains("dress-code")) {
-                currentPetalColors = colorPalettes.dress;
-            }
-            else if (entry.target.classList.contains("gifts-section")) {
-                currentPetalColors = colorPalettes.gifts;
-            }
-            else if (entry.target.classList.contains("attendance")) {
-                currentPetalColors = colorPalettes.attendance;
-            }
-        }
-    });
-}, { threshold: 0.4 });
+    const size = Math.random() * 10 + 8;
+    petal.style.width = size + 'px';
+    petal.style.height = size + 'px';
+    petal.style.left = Math.random() * 100 + 'vw';
 
-sections.forEach(section => sectionObserver.observe(section));
+    petal.style.background =
+        currentPetalColors[Math.floor(Math.random() * currentPetalColors.length)];
 
+    const duration = Math.random() * 4 + 6;
+    petal.style.animationDuration = duration + 's';
+
+    document.body.appendChild(petal);
+
+    setTimeout(() => petal.remove(), duration * 1000);
+}
 
 function startPetals() {
     if (petalInterval) return;
-
-    const isMobile = window.innerWidth < 768;
-    const interval = isMobile ? 900 : 500;
-
+    const interval = window.innerWidth < 768 ? 900 : 500;
     petalInterval = setInterval(createPetal, interval);
 }
 
@@ -1936,34 +1867,67 @@ function stopPetals() {
     }
 }
 
-// Iniciar pétalos cuando la página esté lista
-window.addEventListener("load", () => {
-    startPetals();
+document.addEventListener("visibilitychange", () => {
+    document.hidden ? stopPetals() : startPetals();
 });
 
-// Detener si la pestaña no está activa (optimización)
-document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-        stopPetals();
-    } else {
-        startPetals();
-    }
-});
 
 /* ===========================
-   INICIAR DESPUÉS DEL SOBRE
-   =========================== */
+   CAMBIO DE COLOR POR SECCIÓN
+=========================== */
+
+const sections = document.querySelectorAll("section, header");
+
+const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+
+            if (entry.target.classList.contains("hero"))
+                currentPetalColors = colorPalettes.hero;
+
+            else if (entry.target.classList.contains("wedding-section"))
+                currentPetalColors = colorPalettes.wedding;
+
+            else if (entry.target.classList.contains("schedule-section"))
+                currentPetalColors = colorPalettes.schedule;
+
+            else if (entry.target.classList.contains("dress-code"))
+                currentPetalColors = colorPalettes.dress;
+
+            else if (entry.target.classList.contains("gifts-section"))
+                currentPetalColors = colorPalettes.gifts;
+
+            else if (entry.target.classList.contains("attendance"))
+                currentPetalColors = colorPalettes.attendance;
+        }
+    });
+}, { threshold: 0.4 });
+
+sections.forEach(section => sectionObserver.observe(section));
+
+
+/* ===========================
+   INVITACIÓN / SOBRE
+=========================== */
+
+document.body.style.overflow = "hidden";
+
 window.addEventListener("load", () => {
     const envelope = document.getElementById("invitationCover");
 
-    setTimeout(() => envelope.classList.add("open"), 1200);
+    setTimeout(() => envelope?.classList.add("open"), 1200);
+
     setTimeout(() => {
-        envelope.classList.add("hide");
+        envelope?.classList.add("hide");
         document.body.style.overflow = "auto";
-        startPetals(); // 👈 AQUÍ SE ACTIVAN
+        startPetals();
     }, 3400);
 });
 
+
+/* ===========================
+   RSVP
+=========================== */
 
 const params = new URLSearchParams(window.location.search);
 const familia = params.get("familia");
@@ -1978,180 +1942,160 @@ const attendanceText = document.getElementById("attendanceText");
 const passesBox = document.getElementById("passesBox");
 
 if (!familia) {
-  attendanceText.textContent = "Invitación no válida.";
-  btnAceptar.style.display = "none";
-  passesBox.style.display = "none";
+    attendanceText.textContent = "Invitación no válida.";
+    btnAceptar.style.display = "none";
+    passesBox.style.display = "none";
 } else {
-  fetch(`/.netlify/functions/obtener-invitado?familia=${encodeURIComponent(familia)}`)
-    .then(res => res.json())
-    .then(res => {
-      if (!res.ok || !res.invitado) {
-        attendanceText.textContent = "Invitación no encontrada.";
-        btnAceptar.style.display = "none";
-        passesBox.style.display = "none";
-        return;
-      }
 
-      const invitado = res.invitado;
+    fetch(`/.netlify/functions/obtener-invitado?familia=${encodeURIComponent(familia)}`)
+        .then(res => res.json())
+        .then(res => {
 
-      familyName.textContent = invitado.nombre;
-      passesCount.innerHTML = `Tienen <strong>${invitado.Pases}</strong> pases reservados`;
+            if (!res.ok || !res.invitado) {
+                attendanceText.textContent = "Invitación no encontrada.";
+                btnAceptar.style.display = "none";
+                passesBox.style.display = "none";
+                return;
+            }
 
-      if (invitado.Acepto) {
-        mostrarGracias();
-          generarQR();
-      } else {
-        btnAceptar.style.display = "inline-block";
-      }
+            const invitado = res.invitado;
 
-     btnAceptar.addEventListener("click", () => {
-    modal.classList.add("active");
-});
+            familyName.textContent = invitado.nombre;
+            passesCount.innerHTML =
+                `Tienen <strong>${invitado.pases}</strong> pases reservados`;
 
-confirmYes.addEventListener("click", () => {
-    enviarRespuesta(true);
-});
-
-confirmNo.addEventListener("click", () => {
-    enviarRespuesta(false);
-});
-
-
+            if (invitado.acepto) {
+                mostrarGracias();
+                generarQR(invitado.nombre);
+            } else {
+                btnAceptar.style.display = "inline-block";
+            }
+        });
 }
-async function enviarRespuesta(asiste) {
 
-    const familyName = document.getElementById("familyName").textContent;
-    const passes = document.getElementById("passesCount").textContent;
+
+/* ===========================
+   ENVÍO RSVP (ÚNICA FUNCIÓN)
+=========================== */
+
+async function enviarRespuesta(asistira) {
 
     try {
         const response = await fetch("/.netlify/functions/rsvp", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                familia: familyName,
-                pases: passes,
-                asistira: asiste
+                familia,
+                asistira
             })
         });
 
         const data = await response.json();
 
-        alert("¡Respuesta enviada correctamente!");
+        if (!data.ok) {
+            alert(data.message || "Error al enviar respuesta");
+            return;
+        }
+
         modal.classList.remove("active");
 
+        if (asistira) {
+            mostrarGracias();
+            generarQR(familia);
+            crearEventoCalendario();
+        } else {
+            attendanceText.innerHTML =
+                "Gracias por avisarnos 🤍 Lamentaremos tu ausencia.";
+            btnAceptar.style.display = "none";
+        }
+
     } catch (error) {
-        alert("Ocurrió un error. Inténtalo nuevamente.");
         console.error(error);
+        alert("Error de conexión");
     }
 }
 
-        function mostrarGracias() {
-            attendanceText.innerHTML = `
+
+/* ===========================
+   EVENTOS MODAL
+=========================== */
+
+btnAceptar?.addEventListener("click", () => {
+    modal.classList.add("active");
+});
+
+confirmYes?.addEventListener("click", () => enviarRespuesta(true));
+confirmNo?.addEventListener("click", () => enviarRespuesta(false));
+
+
+/* ===========================
+   MENSAJE GRACIAS
+=========================== */
+
+function mostrarGracias() {
+    attendanceText.innerHTML = `
         💖 Gracias por aceptar nuestra invitación.<br>
         Por favor recuerda la fecha.<br>
         Será un honor contar con ustedes.
     `;
-            btnAceptar.style.display = "none";
-        }
-
-        function aceptarInvitacion(familia) {
-            fetch("/.netlify/functions/aceptarInvitacion", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ familia })
-            })
-                .then(res => res.json())
-                .then(res => {
-                    if (res.ok) {
-                        crearEventoCalendario();
-                        mostrarGracias();generarQR();
-                    } else {
-                        alert(res.message || "No se pudo confirmar la invitación");
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert("Error de conexión");
-                });
-        }
+    btnAceptar.style.display = "none";
+}
 
 
-        /* ===== CALENDARIO ===== */
-      function crearEventoCalendario() {
-  const ics = `
+/* ===========================
+   CALENDARIO
+=========================== */
+
+function crearEventoCalendario() {
+    const ics = `
 BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Boda Coral & Daniel//ES
 BEGIN:VEVENT
-UID:boda-Coral-Daniel-2026@example.com
+UID:boda-2026@example.com
 DTSTAMP:20260101T000000Z
 DTSTART:20260426T150000
 DTEND:20260426T230000
 SUMMARY:Boda Coral & Daniel
-DESCRIPTION:Recordatorio de la boda de Coral & Daniel
+DESCRIPTION:Recordatorio de la boda
 LOCATION:Salón de Eventos SUTM
-BEGIN:VALARM
-TRIGGER:-P14D
-ACTION:DISPLAY
-DESCRIPTION:Recordatorio boda
-END:VALARM
 END:VEVENT
 END:VCALENDAR
-  `.trim();
+`.trim();
 
-  const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
+    const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
 
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "Boda_Coral_Daniel.ics";
-  document.body.appendChild(link);
-  link.click();
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "Boda_Coral_Daniel.ics";
+    link.click();
 
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+    URL.revokeObjectURL(url);
 }
-        // Seleccionamos todos los elementos que queremos animar
-const revealElements = document.querySelectorAll('.reveal-item');
 
-const observerOptions = {
-    threshold: 0.15, // Se activa cuando el 15% del elemento es visible
-    rootMargin: "0px"
-};
 
-const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            // Agregamos un pequeño retraso (delay) basado en el índice
-            // para crear el efecto cascada
-            setTimeout(() => {
-                entry.target.classList.add('visible');
-            }, index * 200); // 200ms de diferencia entre cada elemento
-            
-            // Dejar de observar una vez animado
-            observer.unobserve(entry.target);
-        }
+/* ===========================
+   QR
+=========================== */
+
+function generarQR(familia) {
+
+    const qrData = JSON.stringify({
+        familia: familia,
+        evento: "Boda Coral & Daniel",
+        tipo: "PASE_ENTRADA"
     });
-}, observerOptions);
-        		function generarQR(familia) {
-  const qrData = JSON.stringify({
-    familia: familia,
-    evento: "Boda Coral & Daniel",
-    tipo: "PASE_ENTRADA"
-  });
 
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(qrData)}`;
+    const qrUrl =
+        `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(qrData)}`;
 
-  const qrContainer = document.getElementById("qrContainer");
-  const qrCode = document.getElementById("qrCode");
+    const qrContainer = document.getElementById("qrContainer");
+    const qrCode = document.getElementById("qrCode");
 
-  qrCode.innerHTML = `<img src="${qrUrl}" alt="QR Pase de Entrada">`;
-  qrContainer.style.display = "block";
+    qrCode.innerHTML = `<img src="${qrUrl}" alt="QR Pase de Entrada">`;
+    qrContainer.style.display = "block";
 }
-
-revealElements.forEach(el => revealObserver.observe(el));
 
     </script>
 
