@@ -241,6 +241,14 @@ input {
 <div id="lista" class="section">
 
   <p class="section-label">Filtros</p>
+<div id="totalesBox" style="margin-bottom:20px; padding:14px; border-radius:14px; background:rgba(176,147,90,.12); font-size:.95rem;">
+  <strong>Resumen:</strong><br>
+  Total invitados: <span id="totalInvitados">0</span><br>
+  Aceptaron: <span id="totalAceptaron" style="color:green;font-weight:bold;">0</span><br>
+  Rechazaron: <span id="totalRechazaron" style="color:#b02a37;font-weight:bold;">0</span><br>
+  Pendientes: <span id="totalPendientes" style="color:#b0935a;font-weight:bold;">0</span><br>
+  Total pases disponibles: <span id="totalDisponibles">0</span>
+</div>
 
   <input type="text" id="filtroNombre" placeholder="Buscar por nombre o familia">
 
@@ -260,17 +268,19 @@ input {
   <br><br>
 
   <table class="access-table">
-    <thead>
-  <tr>
-    <th>Familia</th>
-    <th>Nombre</th>
-    <th>Pases</th>
-    <th>Usados</th>
-    <th>Disponibles</th>
-    <th>Aceptó</th>
-    <th>Rechazó</th>
-  </tr>
+   <thead>
+<tr>
+  <th>Familia</th>
+  <th>Nombre</th>
+  <th>Pases</th>
+  <th>Usados</th>
+  <th>Disponibles</th>
+  <th>Aceptó</th>
+  <th>Rechazó</th>
+  <th>Pendiente</th>
+</tr>
 </thead>
+
 
     <tbody id="tabla"></tbody>
   </table>
@@ -420,28 +430,56 @@ function renderTabla(data) {
   const tabla = document.getElementById("tabla");
   tabla.innerHTML = "";
 
+  let totalInvitados = 0;
+  let totalAceptaron = 0;
+  let totalRechazaron = 0;
+  let totalPendientes = 0;
+  let totalDisponibles = 0;
+
   data.forEach(i => {
 
-    const acepto = i.acepto === true ? "✔" : "";
-    const rechazo = i.acepto === false ? "✖" : "";
+    totalInvitados++;
+
+    const disponibles = i.disponibles ?? (i.pases - (i.pasesuti || 0));
+    totalDisponibles += disponibles;
+
+    let acepto = "";
+    let rechazo = "";
+    let pendiente = "";
+
+    if (i.acepto === true) {
+      acepto = "✔";
+      totalAceptaron++;
+    } else if (i.acepto === false) {
+      rechazo = "✖";
+      totalRechazaron++;
+    } else {
+      pendiente = "⏳";
+      totalPendientes++;
+    }
 
     tabla.innerHTML += `
       <tr>
         <td>${i.familia}</td>
         <td>${i.displayname}</td>
         <td>${i.pases}</td>
-        <td>${i.pasesuti}</td>
-        <td>${i.disponibles}</td>
-        <td style="text-align:center;color:green;font-weight:bold;">
-          ${acepto}
-        </td>
-        <td style="text-align:center;color:#b02a37;font-weight:bold;">
-          ${rechazo}
-        </td>
+        <td>${i.pasesuti || 0}</td>
+        <td>${disponibles}</td>
+        <td style="text-align:center;color:green;font-weight:bold;">${acepto}</td>
+        <td style="text-align:center;color:#b02a37;font-weight:bold;">${rechazo}</td>
+        <td style="text-align:center;color:#b0935a;font-weight:bold;">${pendiente}</td>
       </tr>
     `;
   });
+
+  // Actualizar totales
+  document.getElementById("totalInvitados").textContent = totalInvitados;
+  document.getElementById("totalAceptaron").textContent = totalAceptaron;
+  document.getElementById("totalRechazaron").textContent = totalRechazaron;
+  document.getElementById("totalPendientes").textContent = totalPendientes;
+  document.getElementById("totalDisponibles").textContent = totalDisponibles;
 }
+
 
 document.getElementById("filtroNombre").addEventListener("input", aplicarFiltros);
 document.getElementById("filtroEstado").addEventListener("change", aplicarFiltros);
@@ -466,7 +504,8 @@ function aplicarFiltros() {
     let coincideEstado = true;
     if (estadoFiltro === "aceptado") coincideEstado = i.acepto === true;
     if (estadoFiltro === "rechazado") coincideEstado = i.acepto === false;
-    if (estadoFiltro === "pendiente") coincideEstado = i.acepto === null;
+    if (estadoFiltro === "pendiente") coincideEstado = i.acepto !== true && i.acepto !== false;
+
 
     // filtro disponibles
     let coincideDisp = true;
