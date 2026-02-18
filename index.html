@@ -2002,7 +2002,6 @@ btnSi.addEventListener("click", () => {
 
   aceptarInvitacion(familiaActual, true);
 
-  // Cambiamos contenido del modal
   const content = document.querySelector(".rsvp-modal-content");
 
   content.innerHTML = `
@@ -2014,12 +2013,25 @@ btnSi.addEventListener("click", () => {
     </p>
   `;
 
-  // Cerrar después de 4 segundos
+  // Espera 3 segundos
   setTimeout(() => {
+
     modal.classList.remove("active");
-  }, 4000);
+
+    // Espera a que cierre animación (400ms aprox)
+    setTimeout(() => {
+
+      qrContainer.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+    }, 500);
+
+  }, 3000);
 
 });
+
 
 btnNo.addEventListener("click", () => {
   modal.classList.remove("active");
