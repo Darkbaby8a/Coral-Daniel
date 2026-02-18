@@ -20,7 +20,7 @@ export const handler = async () => {
         
         CASE
           WHEN acepto = true THEN 'acepto'
-          WHEN acepto = false THEN 'rechazo'
+          WHEN rechazo = true THEN 'rechazo'
           ELSE 'pendiente'
         END AS estado,
 
