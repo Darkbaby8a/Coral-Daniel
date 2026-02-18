@@ -7,17 +7,23 @@ const pool = new Pool({
 
 export const handler = async () => {
   try {
-    const { rows } = await pool.query(`
-      SELECT
-        familia,
-        displayname,
-        pases,
-        COALESCE(pasesuti, 0) AS pasesuti,
-        acepto,
-        confirmado_en
-      FROM invitados
-      ORDER BY familia
-    `);
+const { rows } = await pool.query(`
+  SELECT
+    familia,
+    displayname,
+    pases,
+    COALESCE(pasesuti, 0) AS pasesuti,
+    (pases - COALESCE(pasesuti, 0)) AS disponibles,
+    acepto,
+    confirmado_en,
+    CASE 
+      WHEN acepto = false THEN true
+      ELSE false
+    END AS rechazo
+  FROM invitados
+  ORDER BY familia, displayname
+`);
+
 
     return {
       statusCode: 200,
