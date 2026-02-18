@@ -1782,8 +1782,25 @@ function generarQR(familia) {
   qrCode.innerHTML = `<img src="${qrUrl}" alt="QR Pase de Entrada">`;
   qrContainer.style.display = "block";
 }
+/* =========================== MOSTRAR SECCIÓN PRINCIPAL =========================== */
 
-										</script>
+const weddingSection = document.querySelector(".wedding-section");
+
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  },
+  { threshold: 0.15 }
+);
+
+if (weddingSection) {
+  sectionObserver.observe(weddingSection);
+}
+
 				</script> 
    </body>
 </html>
