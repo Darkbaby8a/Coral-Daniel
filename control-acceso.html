@@ -158,6 +158,24 @@ input {
   margin-bottom: 12px;
   cursor: pointer;
 }
+  .estado-mensaje {
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.estado-ok {
+  color: #2e7d32;
+}
+
+.estado-denegado {
+  color: #c62828;
+}
+
+.estado-pendiente {
+  color: #ef6c00;
+}
+
 
 .result-item:hover {
   background: rgba(176,147,90,.12);
@@ -232,6 +250,7 @@ input {
 
   <input type="number" id="pasesUsar" placeholder="Pases a utilizar">
   <button class="btn-primary" onclick="registrar()">Registrar entrada</button>
+  <div id="estadoAcceso" class="estado-mensaje"></div>
 
   <div id="mensaje" class="status">✔ Acceso registrado correctamente</div>
 </div>
@@ -428,26 +447,59 @@ function seleccionar(i) {
   const dispEl = document.getElementById("disponibles");
   dispEl.textContent = disponibles;
 
-  // Colores visuales
   if (disponibles > 0) {
     dispEl.className = "disponibles-ok";
   } else {
     dispEl.className = "disponibles-cero";
   }
 
-  document.getElementById("mensaje").style.display = "none";
-
-  // 🔒 BLOQUEO VISUAL DEL BOTÓN
   const btn = document.querySelector("#infoBox .btn-primary");
+  const estado = document.getElementById("estadoAcceso");
 
-  if (i.acepto === true && i.rechazo === false && disponibles > 0) {
-    btn.disabled = false;
-    btn.style.opacity = "1";
-  } else {
+  // 🔎 VALIDACIONES DE ESTADO
+  if (i.rechazo === true) {
+
     btn.disabled = true;
+    btn.textContent = "Acceso Denegado";
     btn.style.opacity = "0.5";
+
+    estado.textContent = "🔴 Invitación rechazada";
+    estado.className = "estado-mensaje estado-denegado";
+
   }
+  else if (i.acepto !== true) {
+
+    btn.disabled = true;
+    btn.textContent = "Pendiente";
+    btn.style.opacity = "0.5";
+
+    estado.textContent = "🟡 Invitación pendiente de confirmación";
+    estado.className = "estado-mensaje estado-pendiente";
+
+  }
+  else if (disponibles <= 0) {
+
+    btn.disabled = true;
+    btn.textContent = "Sin pases disponibles";
+    btn.style.opacity = "0.5";
+
+    estado.textContent = "🔴 Todos los pases ya fueron utilizados";
+    estado.className = "estado-mensaje estado-denegado";
+
+  }
+  else {
+
+    btn.disabled = false;
+    btn.textContent = "Registrar Entrada";
+    btn.style.opacity = "1";
+
+    estado.textContent = "🟢 Acceso permitido";
+    estado.className = "estado-mensaje estado-ok";
+  }
+
+  document.getElementById("mensaje").style.display = "none";
 }
+
 
 
 /* =============================
