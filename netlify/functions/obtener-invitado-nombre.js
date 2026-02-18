@@ -27,6 +27,7 @@ export const handler = async (event) => {
         pases,
         acepto,
         displayname,
+        rechazo,
         COALESCE(pasesuti, 0)      AS pasesusados,
         pases - COALESCE(pasesuti, 0) AS disponibles
       FROM public.invitados
