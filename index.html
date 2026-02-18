@@ -1810,9 +1810,11 @@ if (!familia) {
   btnAceptar.style.display = "none";
   passesBox.style.display = "none";
 } else {
+
   fetch(`/.netlify/functions/obtener-invitado?familia=${encodeURIComponent(familia)}`)
     .then((res) => res.json())
     .then((res) => {
+
       if (!res.ok || !res.invitado) {
         attendanceText.textContent = "Invitación no encontrada.";
         btnAceptar.style.display = "none";
@@ -1825,16 +1827,24 @@ if (!familia) {
       familyName.textContent = invitado.nombre;
       passesCount.innerHTML = `Tienen <strong>${invitado.Pases}</strong> pases reservados`;
 
-      if (invitado.Acepto) {
-        mostrarGracias();
-        generarQR(familia);
-      } else {
-        btnAceptar.style.display = "inline-block";
-      }
+      // 🔎 CASOS POSIBLES
+      if (invitado.Acepto === true) {
 
-      btnAceptar.addEventListener("click", () =>
-       abrirModal(familia);
-      );
+        mostrarGracias(true);
+        generarQR(familia);
+        btnAceptar.style.display = "none";
+
+      } else if (invitado.rechazo === true) {
+
+        mostrarGracias(false);
+        btnAceptar.style.display = "none";
+
+      } else {
+
+        // Aún no ha confirmado
+        btnAceptar.style.display = "inline-block";
+
+      }
     })
     .catch(() => {
       attendanceText.textContent = "Error al cargar la invitación.";
@@ -1842,6 +1852,10 @@ if (!familia) {
       passesBox.style.display = "none";
     });
 }
+btnAceptar.addEventListener("click", () => {
+  abrirModal(familia);
+});
+
 
 
 /* =========================== ACEPTAR INVITACIÓN =========================== */
