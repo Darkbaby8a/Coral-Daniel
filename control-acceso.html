@@ -582,10 +582,16 @@ function renderTabla(data) {
   let totalAceptaron = 0;
   let totalRechazaron = 0;
   let totalPendientes = 0;
+  let totalDisponibles = 0;
 
   data.forEach(i => {
 
     totalInvitados++;
+
+    const usados = i.pasesuti || 0;
+    const disponibles = (i.pases || 0) - usados;
+
+    totalDisponibles += disponibles;
 
     let acepto = "";
     let rechazo = "";
@@ -599,7 +605,7 @@ function renderTabla(data) {
       rechazo = "✖";
       totalRechazaron++;
     }
-    else if (i.acepto === false && i.rechazo === false) {
+    else {
       pendiente = "⏳";
       totalPendientes++;
     }
@@ -609,7 +615,8 @@ function renderTabla(data) {
         <td>${i.familia}</td>
         <td>${i.displayname}</td>
         <td>${i.pases}</td>
-        <td>${i.pasesuti || 0}</td>
+        <td>${usados}</td>
+        <td>${disponibles}</td>
         <td style="text-align:center;color:green;font-weight:bold;">${acepto}</td>
         <td style="text-align:center;color:#b02a37;font-weight:bold;">${rechazo}</td>
         <td style="text-align:center;color:#b0935a;font-weight:bold;">${pendiente}</td>
@@ -621,6 +628,7 @@ function renderTabla(data) {
   document.getElementById("totalAceptaron").textContent = totalAceptaron;
   document.getElementById("totalRechazaron").textContent = totalRechazaron;
   document.getElementById("totalPendientes").textContent = totalPendientes;
+  document.getElementById("totalDisponibles").textContent = totalDisponibles;
 }
 
 /* =============================
