@@ -266,7 +266,7 @@ input {
   Aceptaron: <span id="totalAceptaron" style="color:green;font-weight:bold;">0</span><br>
   Rechazaron: <span id="totalRechazaron" style="color:#b02a37;font-weight:bold;">0</span><br>
   Pendientes: <span id="totalPendientes" style="color:#b0935a;font-weight:bold;">0</span><br>
-  Total pases disponibles: <span id="totalDisponibles">0</span>
+  Total pases Aceptados: <span id="totalDisponibles">0</span>
 </div>
 
   <input type="text" id="filtroNombre" placeholder="Buscar por nombre o familia">
@@ -582,7 +582,7 @@ function renderTabla(data) {
   let totalAceptaron = 0;
   let totalRechazaron = 0;
   let totalPendientes = 0;
-  let totalDisponibles = 0;
+  let totalPasesAceptados = 0; // 👈 NUEVO
 
   data.forEach(i => {
 
@@ -591,8 +591,6 @@ function renderTabla(data) {
     const usados = i.pasesuti || 0;
     const disponibles = (i.pases || 0) - usados;
 
-    totalDisponibles += disponibles;
-
     let acepto = "";
     let rechazo = "";
     let pendiente = "";
@@ -600,6 +598,9 @@ function renderTabla(data) {
     if (i.acepto === true && i.rechazo === false) {
       acepto = "✔";
       totalAceptaron++;
+
+      // 🔥 SUMAR PASES DE LOS QUE ACEPTARON
+      totalPasesAceptados += (i.pases || 0);
     }
     else if (i.acepto === false && i.rechazo === true) {
       rechazo = "✖";
@@ -628,7 +629,9 @@ function renderTabla(data) {
   document.getElementById("totalAceptaron").textContent = totalAceptaron;
   document.getElementById("totalRechazaron").textContent = totalRechazaron;
   document.getElementById("totalPendientes").textContent = totalPendientes;
-  document.getElementById("totalDisponibles").textContent = totalDisponibles;
+
+  // 👇 AQUÍ CAMBIASTE EL SIGNIFICADO
+  document.getElementById("totalDisponibles").textContent = totalPasesAceptados;
 }
 
 /* =============================
